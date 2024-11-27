@@ -4,10 +4,10 @@ COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 RUN npm run build
-
-RUN npm run dev
+EXPOSE 5173
+#RUN npm run dev
 
 #FROM busybox:1.30 AS runner
 #WORKDIR /app
 #COPY --from=builder /app/dist .
-#CMD ["busybox", "httpd", "-f", "-v", "-p", "5173"]
+CMD ["npm", "run", "dev"]
