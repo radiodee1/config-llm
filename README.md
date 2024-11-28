@@ -7,6 +7,11 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 ## Command Line Notes:
 
 ```
+npm install --save [packagename]@[version]
+
+npm run build
+npm run dev 
+
 sudo docker ps
 sudo docker kill ff
 
