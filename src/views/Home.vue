@@ -1,10 +1,22 @@
 <script >
 
+export default {
+    props: {
+        var: String,
+    },
+    data() {
+        return {
+            msg: this.var
+        }
+    }
+}
+
 </script>
 
 <template>
   <div>
-    Home
+      Home <br>
+    {{ msg }}
   </div>
 </template>
 

@@ -8,11 +8,12 @@ import List from '../views/AddList.vue'
 import Var from '../views/AddVar.vue'
 
 const routes = [
-    { path: '/', component: Home },
+
+    { path: '/home:var', component: Home, props:true },
     { path: '/about', component: About },  
     { path: '/config', component: Config },
     { path: '/list', component: List },
-    { path: '/var', component: Var },
+    { path: '/variable:var', component: Var, props:true },
 
 ]
 

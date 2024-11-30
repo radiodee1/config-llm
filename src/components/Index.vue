@@ -1,21 +1,23 @@
-<script setup>
-import { ref } from 'vue'
+<script>
 
-defineProps({
-  msg: String,
-})
+export default {
+    data() {
+        return {
+            var: 'something' 
+            //count: ref(0)
+            }
+        }
+    }
 
-const count = ref(0)
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
-    <router-view >
+  <router-view :var="var" />
 
-    </router-view>
   <div class="card">
-      <button type="button" @click="count++">count is {{ count }}</button><br>
-      <router-link to="/">Home</router-link><br>
+      <!-- button type="button" @click="count++">count is {{ count }}</button><br -->
+      <router-link to="{path:'/home', props:var}">Home</router-link><br>
 
       <router-link to="/about">About</router-link><br>
 
@@ -23,7 +25,7 @@ const count = ref(0)
 
       <router-link to="/list">List</router-link><br>
 
-      <router-link to="/var">Var</router-link>
+      <router-link to="{path:'/variable', props:var}">Var</router-link>
 
   <p>
       Edit
