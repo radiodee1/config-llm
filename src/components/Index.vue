@@ -16,7 +16,15 @@ const count = ref(0)
   <div class="card">
       <button type="button" @click="count++">count is {{ count }}</button><br>
       <router-link to="/">Home</router-link><br>
-      <router-link to="/about">About</router-link>
+
+      <router-link to="/about">About</router-link><br>
+
+      <router-link to="/config">Config</router-link><br>
+
+      <router-link to="/list">List</router-link><br>
+
+      <router-link to="/var">Var</router-link>
+
   <p>
       Edit
       <code>components/Index.vue</code> to test
