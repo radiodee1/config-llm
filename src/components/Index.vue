@@ -17,20 +17,16 @@ export default {
 
   <div class="card">
       <!-- button type="button" @click="count++">count is {{ count }}</button><br -->
-      <router-link to="{path:'/home', props:var}">Home</router-link><br>
+      <router-link  to="{path:'/home', props:var}"><button>Home</button></router-link><br>
 
-      <router-link to="/about">About</router-link><br>
+      <router-link  to="/about"><button>About</button></router-link><br>
 
-      <router-link to="/config">Config</router-link><br>
+      <router-link to="/config"><button>Config</button></router-link><br>
 
-      <router-link to="/list">List</router-link><br>
+      <router-link to="/list"><button>List</button></router-link><br>
 
-      <router-link to="{path:'/variable', props:var}">Var</router-link>
+      <router-link to="{path:'/variable', props:var}"><button>Var</button></router-link>
 
-  <p>
-      Edit
-      <code>components/Index.vue</code> to test
-    </p>
   </div>
 
 </template>
