@@ -1,9 +1,17 @@
 <script>
 
+import dict from '../js/dict.js'
+
 export default {
     data() {
         return {
-            var: 'something' 
+            var: 'something', 
+            vars: dict.var,
+            configs: dict.config,
+            lists: dict.list,
+            options: dict.options,
+            filename: dict.filename
+
             //count: ref(0)
             }
         }
@@ -13,6 +21,9 @@ export default {
 
 <template>
   <h1>{{ msg }}</h1>
+  <br>
+  {{ vars }} <br>
+  {{ filename }}
   <router-view :var="var" />
 
   <div class="card">
