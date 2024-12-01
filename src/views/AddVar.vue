@@ -3,10 +3,11 @@
 export default {
     props: {
         var: String,
+        item: String
     },
     data() {
         return {
-            msg: this.var
+            msg: 'some thing',
         }
     }
 }
@@ -16,7 +17,8 @@ export default {
 <template>
   <div>
       Var <br>
-    {{ msg }}    
+      {{ var }} <br>
+      {{ item }}
   </div>
 </template>
 
