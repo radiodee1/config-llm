@@ -34,7 +34,11 @@ export default {
             return v
         } 
     }
-}
+};
+
+window.addEventListener("load", function(event) {
+    // here is the Vue code
+});
 
 </script>
 
