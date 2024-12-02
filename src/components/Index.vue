@@ -13,6 +13,7 @@ export default {
             filename: dict.filename,
             item: "",
             userdir: "",
+            textfile: "",
             returnKey: "",
             returnVal: "",
             }
