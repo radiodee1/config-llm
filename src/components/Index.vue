@@ -28,7 +28,10 @@ export default {
         },
         returnApply: function () {
             // like 'close' but saves file.
-        }
+        },
+        matchValue: function (v) {
+            return v
+        } 
     }
 }
 
@@ -61,7 +64,7 @@ export default {
           v-for="item in configs"
           key="item"
         >
-        <td> </td>
+        <td> {{ matchValue(item) }} </td>
         <td>
         <router-link to="/config" 
             @click="passStringVar(item, 'here again')"
@@ -76,7 +79,7 @@ export default {
           v-for="item in lists"
           key="item"
         >
-        <td></td>
+        <td> {{ matchValue(item) }} </td>
         <td>
       <router-link to="/list"
         @click="passStringVar(item, 'here')"
@@ -92,7 +95,7 @@ export default {
           v-for="item in vars"
           key="item"
         >
-        <td></td>
+        <td> {{ matchValue(item) }} </td>
         <td>
       <router-link 
           :to="{name:'variable'}" 
