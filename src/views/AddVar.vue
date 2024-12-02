@@ -3,7 +3,8 @@
 export default {
     props: {
         var: String,
-        item: String
+        item: String,
+        returnStringVar: Function
     },
     data() {
         return {

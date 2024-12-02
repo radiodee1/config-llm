@@ -1,22 +1,35 @@
 const dict = {
 
     var : [
-        'OPENAI_PATH',
-        'OPENAI_DEFAULT'
+        'OPENAI_MODEL',
+        'OPENAI_MODEL_FINETUNE',
+        'OPENAI_API_KEY',
+        'OPENAI_ORGANIZATION',
+        'GOOGLE_APPLICATION_CREDENTIALS'
     ],
     config : [
         'OPENAI_PATH_CONFIG',
-        'OPENAI_DEFAULT_CONFIG'
+        'PROJECT_LAUNCH_ARGS'
     ],
     list : [
         'OPENAI_DEFAULT_LIST',
         'OPENAI_PATH_LIST',
-        'OPENAI_DEFAULT_2_LIST'
+        'OPENAI_CHECKPOINTS'
     ],
     options : [
-        '--name',
+        '--file',
         '--voice',
-        '--local'
+        '--local',
+        '--loop_wait',
+        '--verbose',
+        '--temp',
+        '--timeout',
+        '--cloud_tts',
+        '--cloud_stt',
+        '--mic_timeout',
+        '--truncate',
+        '--questions',
+        '--pc'
     ],
     filename: "~/.llm.env"
 }

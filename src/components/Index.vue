@@ -12,13 +12,19 @@ export default {
             options: dict.options,
             filename: dict.filename,
             item: "",
-            userdir: ""
+            userdir: "",
+            returnKey: "",
+            returnVal: "",
             }
         },
     methods: {
         passStringVar: function (v, x) {
             this.var = v;
             this.item = x;
+        },
+        returnStringVar: function (v, x) {
+            this.returnKey = v;
+            this.returnVal = x;
         }
     }
 }
@@ -29,10 +35,12 @@ export default {
   <h1>{{ msg }}</h1>
   <br>
   {{ vars }} <br>
-  {{ filename }}
+  {{ filename }} <br>
+  {{ returnKey }} : {{ returnVal }}
   <router-view 
       :var="var"
       :item="item"
+      :returnStringVar="returnStringVar"
     />
 
   <div class="card">
@@ -47,7 +55,7 @@ export default {
 
       <router-link to="/config"><button>Config</button></router-link><br>
       <div 
-          v-for="item in vars"
+          v-for="item in lists"
           key="item"
         >
 
