@@ -52,8 +52,17 @@ export default {
       </router-link><br>
 
       <router-link  to="/about"><button>About</button></router-link><br>
+      <div 
+          v-for="item in configs"
+          key="item"
+        >
 
-      <router-link to="/config"><button>Config</button></router-link><br>
+
+        <router-link to="/config">
+            <button>Config {{ item }}</button>
+        </router-link><br>
+      </div>
+
       <div 
           v-for="item in lists"
           key="item"
