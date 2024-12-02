@@ -11,7 +11,8 @@ export default {
             lists: dict.list,
             options: dict.options,
             filename: dict.filename,
-            item: ""
+            item: "",
+            userdir: ""
             }
         },
     methods: {
