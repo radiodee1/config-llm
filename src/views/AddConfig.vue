@@ -1,10 +1,25 @@
 <script >
 
+export default {
+    props: {
+        var: String,
+        item: String,
+        returnStringVar: Function
+    },
+    data() {
+        return {
+            msg: 'some thing',
+        }
+    }
+}
+
 </script>
 
 <template>
   <div>
-    Config
+      Config <br>
+      {{ var }} <br>
+      {{ item }}
   </div>
 </template>
 

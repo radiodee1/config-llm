@@ -25,6 +25,9 @@ export default {
         returnStringVar: function (v, x) {
             this.returnKey = v;
             this.returnVal = x;
+        },
+        returnApply: function () {
+            // like 'close' but saves file.
         }
     }
 }
@@ -41,10 +44,11 @@ export default {
       :var="var"
       :item="item"
       :returnStringVar="returnStringVar"
+      :returnApply="returnApply"
     />
 
   <div class="card">
-      <!-- button type="button" @click="count++">count is {{ count }}</button><br -->
+
       <router-link :to="{name:'home'}"
           @click="passStringVar('home', 'there')"
           >
@@ -52,40 +56,54 @@ export default {
       </router-link><br>
 
       <router-link  to="/about"><button>About</button></router-link><br>
-      <div 
+      <table>
+          <tr 
           v-for="item in configs"
           key="item"
         >
-
-
-        <router-link to="/config">
+        <td> </td>
+        <td>
+        <router-link to="/config" 
+            @click="passStringVar(item, 'here again')"
+            >
             <button>Config {{ item }}</button>
-        </router-link><br>
-      </div>
+        </router-link>
+        </td>
+        <td> {{ item }} </td>
+          </tr>
 
-      <div 
+        <tr 
           v-for="item in lists"
           key="item"
         >
-
+        <td></td>
+        <td>
       <router-link to="/list"
         @click="passStringVar(item, 'here')"
           >
           <button>List {{ item }} </button>
-      </router-link><br>
-      </div>
-      
-      <div 
+      </router-link>
+        </td>
+        <td> {{ item }}</td>
+        </tr>
+        
+        
+    <tr  
           v-for="item in vars"
           key="item"
         >
+        <td></td>
+        <td>
       <router-link 
           :to="{name:'variable'}" 
           @click="passStringVar(item, 'here')">
 
           <button>Var {{ item }}</button><br>
       </router-link>
-      </div>
+        </td>
+        <td>{{ item }}</td>
+    </tr>
+      </table>
   </div>
 
 </template>
