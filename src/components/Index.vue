@@ -1,6 +1,6 @@
 <script>
 
-import dict from '../js/dict.js'
+import dict from '../js/dict.js';
 
 export default {
     data() {
@@ -32,13 +32,13 @@ export default {
         },
         matchValue: function (v) {
             return v
-        } 
+        },
+    },
+    mounted() {
+        
     }
 };
 
-window.addEventListener("load", function(event) {
-    // here is the Vue code
-});
 
 </script>
 
