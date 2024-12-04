@@ -12,7 +12,7 @@ except ImportError:
 class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
-        
+
         if self.path.endswith('users'):
             root_dir = '/home/'
             users = os.listdir(root_dir)
@@ -25,12 +25,25 @@ class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
             self.wfile.write(reply_body.encode('utf-8'))
             return
 
+        elif  self.path.endswith('.env') :
+            filename = str(self.path) #.basename(self.path)
+            with open(filename, 'r') as f:
+                content = f.read()
+
+            self.send_response(200)
+            #self.send_header('Content-Disposition', 'inline; filename=' + filename)
+            self.send_header('Content-type', 'text/plain')
+            #self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(content.encode('utf-8'))
+            return
+
         server.SimpleHTTPRequestHandler.do_GET(self)
         logging.warning(self.headers)
  
     def do_PUT(self):
         """Save a file following a HTTP PUT request"""
-        filename = os.path.basename(self.path)
+        filename = self.path ## os.path.basename(self.path)
 
         # Don't overwrite files
         if os.path.exists(filename):
@@ -49,4 +62,6 @@ class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
         self.wfile.write(reply_body.encode('utf-8'))
 
 if __name__ == '__main__':
+    web_dir = os.path.join(os.path.dirname(__file__), '/')
+    os.chdir(web_dir)
     server.test(HandlerClass=HTTPRequestHandler)
