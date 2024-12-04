@@ -23,4 +23,7 @@ sudo docker build -t config-llm .
 
 sudo docker run -it config-llm bash
 sudo docker run -p 5173:5173 config-llm
+
+curl -X PUT http://localhost:8000/home/dave/.llm.env -d something
+
 ```
