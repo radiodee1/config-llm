@@ -44,12 +44,14 @@ class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
     def do_PUT(self):
         """Save a file following a HTTP PUT request"""
         filename = self.path 
+        path_part = '/' + '/'.join(self.path.split('/')[:-1])
+        print(path_part)
 
         # Don't overwrite arbitrary files
-        if os.path.exists(filename) and not filename.endswith('.llm.env'):
+        if (os.path.exists(filename) and not filename.endswith('.llm.env')) or not os.path.exists(path_part):
             self.send_response(409, 'Conflict')
             self.end_headers()
-            reply_body = '"%s" already exists\n' % filename
+            reply_body = '"%s" already exists or bad path\n' % filename
             self.wfile.write(reply_body.encode('utf-8'))
             return
 
