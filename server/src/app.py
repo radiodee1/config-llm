@@ -1,4 +1,4 @@
-#!/usr/env python3
+#!/usr/bin/env python3
 import http.server
 import os
 import logging
@@ -10,17 +10,24 @@ except ImportError:
     import SimpleHTTPServer as server
 
 class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
-    """
-    SimpleHTTPServer with added bonus of:
-
-    - handle PUT requests
-    - log headers in GET request
-    """
 
     def do_GET(self):
+        
+        if self.path.endswith('users'):
+            root_dir = '/home/'
+            users = os.listdir(root_dir)
+            users_list = []
+            for x in users:
+                users_list.append(x.split('/')[-1])
+            self.send_response(200)
+            self.end_headers()
+            reply_body = ','.join(users_list)
+            self.wfile.write(reply_body.encode('utf-8'))
+            return
+
         server.SimpleHTTPRequestHandler.do_GET(self)
         logging.warning(self.headers)
-
+ 
     def do_PUT(self):
         """Save a file following a HTTP PUT request"""
         filename = os.path.basename(self.path)
