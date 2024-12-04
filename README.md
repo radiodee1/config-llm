@@ -15,6 +15,10 @@ npm run dev
 sudo docker ps
 sudo docker kill ff
 
+docker image prune -a
+
+docker image rmi --force $(docker images -a -q)
+
 sudo docker build -t config-llm .
 
 sudo docker run -it config-llm bash
