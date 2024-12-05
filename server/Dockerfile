@@ -9,9 +9,8 @@ COPY ./src/app.py /app/src/
 # Install any needed dependencies specified in requirements.txt
 # RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 8000 available to the world outside this container
+# Make port available to the world outside this container
 EXPOSE 8000
 
-RUN mkdir /home
 # Run app.py when the container launches
 CMD [ "/app/src/app.py"]

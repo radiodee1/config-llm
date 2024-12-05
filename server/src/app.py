@@ -9,6 +9,7 @@ except ImportError:
     # Handle Python 2.x
     import SimpleHTTPServer as server
 
+
 class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
