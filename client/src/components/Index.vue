@@ -58,6 +58,11 @@ export default {
 
   <div class="card">
 
+      <table v-if="! showUserPicker">
+          <tbody>
+          <tr>
+          <td></td>
+          <td>
       <router-link :to="{name:'home'}"
           @click="passStringVar('home', 'there')"
           >
@@ -65,7 +70,11 @@ export default {
       </router-link><br>
 
       <router-link  to="/about"><button>About</button></router-link><br>
-      <table v-if="! showUserPicker">
+          </td>
+          <td></td>
+          </tr>
+
+
           <tr 
           v-for="item in configs"
           key="item"
@@ -112,6 +121,7 @@ export default {
         </td>
         <td>{{ item }}</td>
     </tr>
+      </tbody>
       </table>
 
       <div v-if="showUserPicker"> show user picker </div>
