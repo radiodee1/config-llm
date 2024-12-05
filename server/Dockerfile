@@ -13,5 +13,6 @@ COPY ./src/app.py /app/src/
 EXPOSE 8000
 
 VOLUME [ "/home" ]
+
 # Run app.py when the container launches
 CMD [ "/app/src/app.py"]
