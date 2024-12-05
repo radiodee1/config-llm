@@ -7,3 +7,10 @@ services:
         build: server/.
         ports:
             - "8000:8000"
+
+        volumes:
+            - /home:/home
+
+volumes:
+    home:
+

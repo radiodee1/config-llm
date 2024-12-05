@@ -12,5 +12,6 @@ COPY ./src/app.py /app/src/
 # Make port available to the world outside this container
 EXPOSE 8000
 
+VOLUME [ "/home" ]
 # Run app.py when the container launches
 CMD [ "/app/src/app.py"]
