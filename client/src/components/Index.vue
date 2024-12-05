@@ -12,6 +12,7 @@ export default {
             options: dict.options,
             filename: dict.filename,
             showUserPicker: false,
+            showProperties: false,
             item: "",
             userdir: "",
             textfile: "",
@@ -23,6 +24,7 @@ export default {
         passStringVar: function (v, x) {
             this.var = v;
             this.item = x;
+            this.showProperties = true;
         },
         returnStringVar: function (v, x) {
             this.returnKey = v;
@@ -49,7 +51,7 @@ export default {
   {{ vars }} <br>
   {{ filename }} <br>
   {{ returnKey }} : {{ returnVal }}
-  <router-view 
+  <router-view v-if="showProperties"
       :var="var"
       :item="item"
       :returnStringVar="returnStringVar"
@@ -58,7 +60,7 @@ export default {
 
   <div class="card">
 
-      <table v-if="! showUserPicker">
+      <table v-if="(! showUserPicker) && (! showProperties)">
           <tbody>
           <tr>
           <td></td>
@@ -125,6 +127,8 @@ export default {
       </table>
 
       <div v-if="showUserPicker"> show user picker </div>
+
+      <a @click="showProperties = false"> reset?? </a>
   </div>
 
 </template>
