@@ -12,7 +12,6 @@ COPY ./src/app.py /app/src/
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
-VOLUME /home/.
-
+RUN mkdir /home
 # Run app.py when the container launches
 CMD [ "/app/src/app.py"]

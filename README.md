@@ -22,6 +22,8 @@ sudo docker build -t config-llm .
 sudo docker run -it config-llm bash
 sudo docker run -p 5173:5173 config-llm
 
+docker run -p 8000:8000 --mount type=bind,source=/home,destination=/home server-llm
+
 curl -X PUT http://localhost:8000/home/dave/.llm.env -d something
 
 ```
