@@ -6,7 +6,7 @@ services:
     server:
         build: server/.
         ports:
-            - "8000:8000"
+            - "8008:8000"
 
         volumes:
             - /home:/home

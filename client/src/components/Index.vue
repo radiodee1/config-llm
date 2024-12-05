@@ -11,6 +11,7 @@ export default {
             lists: dict.list,
             options: dict.options,
             filename: dict.filename,
+            showUserPicker: false,
             item: "",
             userdir: "",
             textfile: "",
@@ -64,7 +65,7 @@ export default {
       </router-link><br>
 
       <router-link  to="/about"><button>About</button></router-link><br>
-      <table>
+      <table v-if="! showUserPicker">
           <tr 
           v-for="item in configs"
           key="item"
@@ -112,6 +113,8 @@ export default {
         <td>{{ item }}</td>
     </tr>
       </table>
+
+      <div v-if="showUserPicker"> show user picker </div>
   </div>
 
 </template>
