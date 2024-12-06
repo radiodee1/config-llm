@@ -15,6 +15,7 @@ export default {
             showProperties: false,
             item: "",
             userdir: "",
+            userlist: [],
             textfile: "",
             returnKey: "",
             returnVal: "",
@@ -36,9 +37,31 @@ export default {
         matchValue: function (v) {
             return v
         },
+        readUserlist: async function() {
+            const url = "http://localhost:8008/users";
+            try {
+                const response = await fetch(url , {
+                    method: "GET",
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://localhost:8008/"
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+
+                //this.userlist = await response.json();
+                console.log(this.userlist);
+            } catch (error) {
+                console.error(error.message);
+            }
+
+        }
     },
     mounted() {
-        
+        if (this.userlist.length == 0){
+            this.readUserlist()
+        } 
     }
 };
 
