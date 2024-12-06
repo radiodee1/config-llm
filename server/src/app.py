@@ -36,7 +36,7 @@ class HTTPRequestHandler(server.BaseHTTPRequestHandler):
             users_list = []
             for x in users:
                 users_list.append(x.split('/')[-1])
-            self.many_headers()
+            #self.many_headers()
             self.send_response(200)
             self.end_headers()
             reply_body = ','.join(users_list)
