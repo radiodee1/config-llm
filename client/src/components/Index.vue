@@ -43,7 +43,7 @@ export default {
                 const response = await fetch(url , {
                     method: "GET",
                     headers: {
-                        "Access-Control-Allow-Origin": "http://localhost:8008/"
+                        "Access-Control-Allow-Origin": "*",
                     }
                 });
                 if (!response.ok) {

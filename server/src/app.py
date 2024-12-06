@@ -10,16 +10,33 @@ except ImportError:
     import SimpleHTTPServer as server
 
 
-class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
+class HTTPRequestHandler(server.BaseHTTPRequestHandler):
+
+    def many_headers(self):           
+        #logging.warning('here...')
+        self.send_header('Access-Control-Allow-Origin', '*')                
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT')
+        self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
+        #self.send_header('Access-Control-Allow-Headers', "Content-type")
+        #self.send_header("Access-Control-Allow-Headers", "Authorization")
+        #self.send_header('Content-type', 'text/html')
+        return
+
+    def do_OPTIONS(self):
+        #logging.warning("options ... ")
+        self.many_headers()
+        self.send_response(200)
+        self.end_headers()
 
     def do_GET(self):
-
+        
         if self.path.endswith('users'):
             root_dir = '/home/'
             users = os.listdir(root_dir)
             users_list = []
             for x in users:
                 users_list.append(x.split('/')[-1])
+            self.many_headers()
             self.send_response(200)
             self.end_headers()
             reply_body = ','.join(users_list)
@@ -41,7 +58,7 @@ class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
 
         server.SimpleHTTPRequestHandler.do_GET(self)
         logging.warning(self.headers)
- 
+
     def do_PUT(self):
         """Save a file following a HTTP PUT request"""
         filename = self.path 
@@ -63,8 +80,13 @@ class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
         self.end_headers()
         reply_body = 'Saved "%s"\n' % filename
         self.wfile.write(reply_body.encode('utf-8'))
+ 
 
 if __name__ == '__main__':
     web_dir = os.path.join(os.path.dirname(__file__), '/')
     os.chdir(web_dir)
-    server.test(HandlerClass=HTTPRequestHandler)
+    #server.test(HandlerClass=HTTPRequestHandler)
+
+    server_address = ('', 8000)
+    httpd = server.HTTPServer(server_address, HTTPRequestHandler)
+    httpd.serve_forever()
