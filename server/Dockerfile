@@ -1,4 +1,4 @@
-
+#FROM ubuntu:24.04
 FROM python:3.12-alpine3.20
 # Set the working directory in the container
 WORKDIR /app
@@ -7,10 +7,13 @@ WORKDIR /app
 COPY . /app
 COPY ./src/app.py /app/src/
 # Install any needed dependencies specified in requirements.txt
-# RUN pip install --no-cache-dir -r requirements.txt
+#RUN apt-get install -y  python3-all # libssl
+RUN apk add --no-cache libcrypto3 ssl_client
+
+#RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem
 
 # Make port available to the world outside this container
-EXPOSE 8000
+EXPOSE 8008
 
 VOLUME [ "/home" ]
 

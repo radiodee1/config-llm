@@ -38,19 +38,22 @@ export default {
             return v
         },
         readUserlist: async function() {
-            const url = "http://localhost:8008/users";
+            const url = "https://localhost:8008/users";
             try {
                 const response = await fetch(url , {
                     method: "GET",
                     headers: {
                         "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Headers": "X-Requested-With",
+                        "Content-Type": "text/plain"
                     }
                 });
                 if (!response.ok) {
                     throw new Error(`Response status: ${response.status}`);
                 }
 
-                //this.userlist = await response.json();
+                this.userlist = await response.text();
                 console.log(this.userlist);
             } catch (error) {
                 console.error(error.message);

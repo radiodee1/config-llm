@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
-import http.server
 import os
 import logging
 
-try:
-    import http.server as server
-except ImportError:
+#try:
+#import http.server as server
+#except ImportError:
     # Handle Python 2.x
-    import SimpleHTTPServer as server
+    #import SimpleHTTPServer as server
+from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
 
-
-class HTTPRequestHandler(server.BaseHTTPRequestHandler):
+class HTTPRequestHandler(SimpleHTTPRequestHandler):
 
     def many_headers(self):           
         #logging.warning('here...')
-        self.send_header('Access-Control-Allow-Origin', '*')                
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT')
+        self.send_header('Access-Control-Allow-Origin', 'http://localhost')                
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS, PUT')
         self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
         #self.send_header('Access-Control-Allow-Headers', "Content-type")
         #self.send_header("Access-Control-Allow-Headers", "Authorization")
@@ -30,20 +29,24 @@ class HTTPRequestHandler(server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         
+        #self.protocol_version = "HTTP/0.9"
+
         if self.path.endswith('users'):
             root_dir = '/home/'
             users = os.listdir(root_dir)
             users_list = []
             for x in users:
                 users_list.append(x.split('/')[-1])
-            #self.many_headers()
+            
+            self.send_header('Content-type', 'text/plain')
+
             self.send_response(200)
             self.end_headers()
             reply_body = ','.join(users_list)
             self.wfile.write(reply_body.encode('utf-8'))
             return
 
-        elif  self.path.endswith('.env') :
+        elif  self.path.endswith('.llm.env') :
             filename = str(self.path) #.basename(self.path)
             with open(filename, 'r') as f:
                 content = f.read()
@@ -55,9 +58,14 @@ class HTTPRequestHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(content.encode('utf-8'))
             return
+        
+        #self.send_header('Content-type', 'text/html')
 
-        server.SimpleHTTPRequestHandler.do_GET(self)
-        logging.warning(self.headers)
+        else:
+             
+            SimpleHTTPRequestHandler.do_GET(self)
+            logging.warning("here...")
+            logging.warning(self.headers)
 
     def do_PUT(self):
         """Save a file following a HTTP PUT request"""
@@ -87,6 +95,6 @@ if __name__ == '__main__':
     os.chdir(web_dir)
     #server.test(HandlerClass=HTTPRequestHandler)
 
-    server_address = ('', 8000)
-    httpd = server.HTTPServer(server_address, HTTPRequestHandler)
+    server_address = ('', 8008)
+    httpd = HTTPServer(server_address, HTTPRequestHandler)
     httpd.serve_forever()
