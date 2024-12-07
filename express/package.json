@@ -1,0 +1,14 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "a js server with express",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "David Liebman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
