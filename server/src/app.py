@@ -10,12 +10,13 @@ class HTTPRequestHandler(SimpleHTTPRequestHandler):
 
     def many_headers(self):           
         #logging.warning('here...')
-        self.send_header('Access-Control-Allow-Origin', 'https://localhost')                
+        self.send_header('Access-Control-Allow-Origin', '*')                
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS, PUT')
-        self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
+        #self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
         #self.send_header('Access-Control-Allow-Headers', "Content-type")
         #self.send_header("Access-Control-Allow-Headers", "Authorization")
         self.send_header('Content-type', 'application/json')
+        self.send_header('Content-Disposition', 'inline')
         self.protocol_version = "HTTP/1.0"
         return
 
@@ -35,14 +36,15 @@ class HTTPRequestHandler(SimpleHTTPRequestHandler):
             users_list = []
             for x in users:
                 users_list.append('"'+ x.split('/')[-1] + '"')
-            
-            self.send_header('Content-type', 'application/json')
+            self.many_headers() 
+            self.send_header('Content-type', 'text/plain')
             self.protocol_version = "HTTP/1.0"
             self.send_response(200)
             self.end_headers()
             reply_body = '{"home": [' + ','.join(users_list) + "]}"
             json_data = json.dumps(reply_body)
-            self.wfile.write(json_data.encode())
+            self.wfile.write(reply_body.encode('utf-8'))
+            #self.wfile.write(json_data.encode())
             return
 
         elif  self.path.endswith('.llm.env') :
