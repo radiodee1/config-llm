@@ -22,8 +22,9 @@ sudo docker build -t config-llm .
 sudo docker run -it config-llm bash
 sudo docker run -p 5173:5173 config-llm
 
-docker run -p 8000:8000 --mount type=bind,source=/home,destination=/home server-llm
+docker run -p 8008:8008 --mount type=bind,source=/home,destination=/home server-llm
 
-curl -X PUT http://localhost:8000/home/dave/.llm.env -d something
+curl -X PUT http://localhost:8008/home/dave/.llm.env -k -d something 
 
+chromium --ignore-certificate-errors --disable-web-security --user-data-dir=./dummy_data
 ```

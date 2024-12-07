@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
 import os
 import logging
-
-#try:
-#import http.server as server
-#except ImportError:
-    # Handle Python 2.x
-    #import SimpleHTTPServer as server
-from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
+import ssl 
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 class HTTPRequestHandler(SimpleHTTPRequestHandler):
 
     def many_headers(self):           
         #logging.warning('here...')
-        self.send_header('Access-Control-Allow-Origin', 'http://localhost')                
+        self.send_header('Access-Control-Allow-Origin', 'https://localhost')                
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS, PUT')
         self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
         #self.send_header('Access-Control-Allow-Headers', "Content-type")
         #self.send_header("Access-Control-Allow-Headers", "Authorization")
-        #self.send_header('Content-type', 'text/html')
+        self.send_header('Content-type', 'application/json')
+        self.protocol_version = "HTTP/1.0"
         return
 
     def do_OPTIONS(self):
@@ -36,13 +32,13 @@ class HTTPRequestHandler(SimpleHTTPRequestHandler):
             users = os.listdir(root_dir)
             users_list = []
             for x in users:
-                users_list.append(x.split('/')[-1])
+                users_list.append('"'+ x.split('/')[-1] + '"')
             
-            self.send_header('Content-type', 'text/plain')
-
+            self.send_header('Content-type', 'application/json')
+            self.protocol_version = "HTTP/1.0"
             self.send_response(200)
             self.end_headers()
-            reply_body = ','.join(users_list)
+            reply_body = "{home: [" + ','.join(users_list) + "]}"
             self.wfile.write(reply_body.encode('utf-8'))
             return
 
@@ -88,7 +84,12 @@ class HTTPRequestHandler(SimpleHTTPRequestHandler):
         self.end_headers()
         reply_body = 'Saved "%s"\n' % filename
         self.wfile.write(reply_body.encode('utf-8'))
- 
+
+def get_ssl_context(certfile, keyfile):
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    context.load_cert_chain(certfile, keyfile)
+    context.set_ciphers("@SECLEVEL=1:ALL")
+    return context
 
 if __name__ == '__main__':
     web_dir = os.path.join(os.path.dirname(__file__), '/')
@@ -97,4 +98,9 @@ if __name__ == '__main__':
 
     server_address = ('', 8008)
     httpd = HTTPServer(server_address, HTTPRequestHandler)
+    
+    context = get_ssl_context("/app/cert.pem", "/app/key.pem")
+    httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
+
+
     httpd.serve_forever()
