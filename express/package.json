@@ -4,11 +4,13 @@
   "description": "a js server with express",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "start": "node src/index.js"
   },
   "author": "David Liebman",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "4.21.2"
   }
 }
