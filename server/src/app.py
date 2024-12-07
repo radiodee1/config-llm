@@ -64,7 +64,7 @@ class HTTPRequestHandler(SimpleHTTPRequestHandler):
         else:
              
             SimpleHTTPRequestHandler.do_GET(self)
-            logging.warning("here...")
+            #logging.warning("here...")
             logging.warning(self.headers)
 
     def do_PUT(self):
