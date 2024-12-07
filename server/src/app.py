@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import os
 import logging
+from os.path import join
 import ssl 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
+import json
 
 class HTTPRequestHandler(SimpleHTTPRequestHandler):
 
@@ -38,8 +40,9 @@ class HTTPRequestHandler(SimpleHTTPRequestHandler):
             self.protocol_version = "HTTP/1.0"
             self.send_response(200)
             self.end_headers()
-            reply_body = "{home: [" + ','.join(users_list) + "]}"
-            self.wfile.write(reply_body.encode('utf-8'))
+            reply_body = '{"home": [' + ','.join(users_list) + "]}"
+            json_data = json.dumps(reply_body)
+            self.wfile.write(json_data.encode())
             return
 
         elif  self.path.endswith('.llm.env') :
