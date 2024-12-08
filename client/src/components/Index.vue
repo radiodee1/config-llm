@@ -1,6 +1,7 @@
 <script>
 
 import dict from '../js/dict.js';
+import Users from './Users.vue';
 
 export default {
     data() {
@@ -11,11 +12,11 @@ export default {
             lists: dict.list,
             options: dict.options,
             filename: dict.filename,
-            showUserPicker: false,
+            showUserPicker: true,
             showProperties: false,
             item: "",
             userdir: "",
-            userlist: [],
+            userlist: "",
             textfile: "",
             returnKey: "",
             returnVal: "",
@@ -37,6 +38,9 @@ export default {
         matchValue: function (v) {
             return v
         },
+        chooseUser: function (v) {
+            this.userdir = v;
+        },
         readUserlist: async function() {
             const url = "http://localhost:8008/users";
             try {
@@ -51,10 +55,11 @@ export default {
                 });
                 if (!response.ok) {
                     throw new Error(`Response status: ${response.status}`);
+                    this.showUserPicker = true;
                 }
 
                 this.userlist = await response.json() ; 
-                if (this.userlist.length == 1) {
+                if (this.userlist.length == 1 ) {
                     this.userdir = this.userlist[0];
                     this.showUserPicker = false;
                 }
@@ -160,7 +165,13 @@ export default {
       </tbody>
       </table>
 
-      <div v-if="showUserPicker"> show user picker </div>
+      <div v-if="showUserPicker">
+          Here
+            <Users 
+                :userlist="userlist"
+                :chooseUser="chooseUser"
+                /> 
+      </div>
 
       <a @click="showProperties = false"> reset?? </a>
   </div>
