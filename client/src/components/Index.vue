@@ -1,7 +1,6 @@
-<script>
+<script >
 
 import dict from '../js/dict.js';
-import Users from './Users.vue';
 
 export default {
     data() {
@@ -12,7 +11,7 @@ export default {
             lists: dict.list,
             options: dict.options,
             filename: dict.filename,
-            showUserPicker: true,
+            showUserPicker: false,
             showProperties: false,
             item: "",
             userdir: "",
@@ -70,6 +69,7 @@ export default {
                 console.log(this.userdir);
             } catch (error) {
                 console.error(error.message);
+                this.showUserPicker = true;
             }
 
         }
@@ -167,11 +167,19 @@ export default {
 
       <div v-if="showUserPicker">
           Here
-            <Users 
-                :userlist="userlist"
-                :chooseUser="chooseUser"
-                /> 
-      </div>
+
+
+            <div>
+                Select user from list : {{ userlist }} <br>
+            <select >
+              <option v-for="option in userlist" :key="option" >
+                {{ option }}
+              </option>
+            </select>
+          </div>
+
+
+         </div>
 
       <a @click="showProperties = false"> reset?? </a>
   </div>
