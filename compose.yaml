@@ -4,9 +4,9 @@ services:
         ports:
             - "5173:5173"
     server:
-        build: server/.
+        build: express/.
         ports:
-            - "8008:8000"
+            - "8008:8008"
 
         volumes:
             - /home:/home

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd server 
+cd express 
 
 sudo docker build -t server-llm .
 
