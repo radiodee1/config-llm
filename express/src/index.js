@@ -8,26 +8,48 @@ const app = express();
 const port = 8008;
 
 app.use(cors())
-//app.use(express.text( {"type":"text/plain"} ));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/config', (req, res) => {
-    res.send('Hello World!');
+    const filepath = req.body.path;
+    if (! filepath.startsWith("/home/")) {
+        res.send('');
+        return;
+    }
+    fs.readFile(filepath, 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+        console.log(data); // Prints the content of the file
+        res.send(data);
+    });
+    //res.send('Hello World!');
 });
 
 app.get('/users', (req, res) => {
-    res.send('users list!');
+    const dirname = '/home/';
+    var filelist = "";
+    fs.readdir(dirname, (err, files) => {
+        
+    if (err) {
+        console.error('Error reading directories:', err);
+        return;
+    }
+        filelist = files;
+        res.send(filelist);
+        //comma separated list of user directories.
+    })
 })
 
 app.put('/config',  function (req, res)  {
     const filename =   '/home/dave/test.txt';
     const fname = req.body.path;
-    // Create a write stream to the file
-    //const writeStream = fs.createWriteStream(filename);
-    const data = req.body.body; // "content here again...";// req.body;
+    
+    //req.body Object contains 'path' and 'body'
+    const data = req.body.body; // 'body' is a sub Object of body !!
 
-    //res.send('body ' + Object.keys(data) + ' ' + filename + ' ');
     console.log(data, fname)
     fs.writeFile(filename, data, (err) => {
     if (err) {
@@ -37,7 +59,6 @@ app.put('/config',  function (req, res)  {
         res.send('Data saved successfully');
     }
   });
-  // Handle the incoming data
 })
 
 
