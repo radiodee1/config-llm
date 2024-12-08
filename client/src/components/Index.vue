@@ -38,7 +38,7 @@ export default {
             return v
         },
         readUserlist: async function() {
-            const url = "https://localhost:8008/users";
+            const url = "http://localhost:8008/users";
             try {
                 const response = await fetch(url , {
                     method: "GET",
@@ -53,8 +53,16 @@ export default {
                     throw new Error(`Response status: ${response.status}`);
                 }
 
-                this.userlist = await response.text();
-                console.log(this.userlist);
+                this.userlist = await response.json() ; 
+                if (this.userlist.length == 1) {
+                    this.userdir = this.userlist[0];
+                    this.showUserPicker = false;
+                }
+                else {
+                    this.showUserPicker = true;
+                }
+                console.log(this.userlist + " " + this.userlist.length);
+                console.log(this.userdir);
             } catch (error) {
                 console.error(error.message);
             }
