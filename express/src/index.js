@@ -10,6 +10,7 @@ const port = 8008;
 app.use(cors())
 //app.use(express.text( {"type":"text/plain"} ));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -19,12 +20,12 @@ app.get('/users', (req, res) => {
     res.send('users list!');
 })
 
-app.put('/config/:path',  function (req, res)  {
+app.put('/config',  function (req, res)  {
     const filename =   '/home/dave/test.txt';
-    const fname = req.params.path;
+    const fname = req.body.path;
     // Create a write stream to the file
     //const writeStream = fs.createWriteStream(filename);
-    const data = req.body.test; // "content here again...";// req.body;
+    const data = req.body.body; // "content here again...";// req.body;
 
     //res.send('body ' + Object.keys(data) + ' ' + filename + ' ');
     console.log(data, fname)
