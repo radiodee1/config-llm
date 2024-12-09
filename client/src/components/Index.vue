@@ -16,7 +16,7 @@ export default {
             item: "",
             userdir: "",
             userlist: "",
-            textfile: "",
+            textfile: ` ENV_VAR=some values\nENV_VAR2=some other values`,
             returnKey: "",
             returnVal: "",
             optionStart: null
@@ -42,7 +42,27 @@ export default {
             // like 'close' but saves file.
         },
         matchValue: function (v) {
-            return v
+            const list = this.textfile.split('\n');
+            if (list.length == 0) {
+                return v;
+            }
+            let x = "";
+            for (let i in list) {
+                const linein = list[i];
+                const linev = linein.trim()
+                if ( linev.split("=").length == 1 ) {
+                    console.log(linev);
+                    return v;
+                }
+                const key = linev.split("=")[0];
+                const kk = key.trim();
+                const val = linev.split("=")[1];
+                const vv = val.trim();
+                if (v == kk) {
+                    x = vv;
+                }
+            }
+            return x
         },
         chooseUser: function (v) {
             this.userdir = v;
@@ -82,7 +102,7 @@ export default {
                 if (this.textfile.length == 0) {
                     this.textfile = ` ENV_VAR=some values\nENV_VAR2=some other values`;
                 }
-
+                
                 this.showUserPicker = true;
             }
 
@@ -114,6 +134,7 @@ export default {
             } catch (error) {
                 console.error(error.message);
             }
+            this.$forceUpdate();
 
         },// end of function...
         writeConfigFile: async function() {
@@ -169,7 +190,7 @@ export default {
                 }
             }
             if (! entered) {
-                newlist += newentry + "\n"; // put it at the end!!
+                newlist += newentry ; // put it at the end!!
             }
             this.textfile = newlist;
         }// end of function...
@@ -179,7 +200,8 @@ export default {
         if (this.userlist.length == 0){
             this.readUserlist();
         } 
-    }
+    },
+    
 };
 
 
