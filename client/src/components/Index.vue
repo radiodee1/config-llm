@@ -32,6 +32,7 @@ export default {
         returnStringVar: function (v, x) {
             this.returnKey = v;
             this.returnVal = x;
+            this.writeConfigFile();
         },
         returnApply: function () {
             // like 'close' but saves file.
@@ -81,7 +82,43 @@ export default {
         readConfigFile: async function() {
             const url = "http://localhost:8008/config";
             const bodyObj = {"path": "/home/" + this.userdir + "/" + this.filename};
-            console.log(bodyObj)
+            
+            //console.log(bodyObj)
+            
+            try {
+                const response = await fetch(url , {
+                    method: "POST",
+                    body: bodyObj,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Headers": "X-Requested-With",
+                        "Content-Type": "text/plain"
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+
+                this.textfile = await response.json() ; 
+                console.log(this.textfile) 
+            } catch (error) {
+                console.error(error.message);
+            }
+
+        },// end of function...
+        writeConfigFile: async function() {
+            if (this.textfile.length == 0) {
+                this.textfile = ` ENV_VAR=some values\nENV_VAR2=some other values`;
+            }
+            const url = "http://localhost:8008/config";
+            const bodyObj = {
+                    "path": "/home/" + this.userdir + "/" + this.filename,
+                    "body": this.textfile
+                };
+            
+            //console.log(bodyObj)
+            
             try {
                 const response = await fetch(url , {
                     method: "POST",

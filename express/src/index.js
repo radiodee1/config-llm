@@ -51,7 +51,7 @@ app.put('/config',  function (req, res)  {
     const data = req.body.body; // 'body' is a sub Object of body !!
 
     console.log(data, fname)
-    fs.writeFile(filename, data, (err) => {
+    fs.writeFile(fname, data, (err) => {
     if (err) {
         console.error(err);
         res.status(500).send('Error writing file');
