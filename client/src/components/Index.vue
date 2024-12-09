@@ -72,7 +72,7 @@ export default {
                 console.log(this.userdir);
             } catch (error) {
                 console.error(error.message);
-                this.userlist = [ 'pick', 'some', 'user' ];
+                this.userlist = [ 'pick', 'some', 'user', 'like', 'dave' ];
                 this.showUserPicker = true;
             }
 
