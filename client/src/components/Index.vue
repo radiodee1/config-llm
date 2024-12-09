@@ -215,7 +215,7 @@ export default {
 
          </div>
 
-      <a @click="showProperties = false"> reset?? </a>
+      <button v-if="showProperties" @click="showProperties = false"> reset?? </button>
   </div>
 
 </template>
