@@ -8,12 +8,9 @@ const dict = {
         'GOOGLE_APPLICATION_CREDENTIALS'
     ],
     config : [
-        'OPENAI_PATH_CONFIG',
         'PROJECT_LAUNCH_ARGS'
     ],
     list : [
-        'OPENAI_DEFAULT_LIST',
-        'OPENAI_PATH_LIST',
         'OPENAI_CHECKPOINTS'
     ],
     options : [
