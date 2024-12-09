@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/config', (req, res) => {
+app.post('/config', (req, res) => {
     const filepath = req.body.path;
     if (! filepath.startsWith("/home/")) {
         res.send('');

@@ -27,6 +27,7 @@ export default {
             this.var = v;
             this.item = x;
             this.showProperties = true;
+            this.readConfigFile()
         },
         returnStringVar: function (v, x) {
             this.returnKey = v;
@@ -75,11 +76,39 @@ export default {
                 this.showUserPicker = true;
             }
 
-        }
+        },// end of method??
+        //////////////////
+        readConfigFile: async function() {
+            const url = "http://localhost:8008/config";
+            const bodyObj = {"path": "/home/" + this.userdir + "/.llm.env"};
+            console.log(bodyObj)
+            try {
+                const response = await fetch(url , {
+                    method: "POST",
+                    body: bodyObj,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Headers": "X-Requested-With",
+                        "Content-Type": "text/plain"
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+
+                this.textfile = await response.json() ; 
+                console.log(this.textfile) 
+            } catch (error) {
+                console.error(error.message);
+            }
+
+        }// end of function...
+
     },
     mounted() {
         if (this.userlist.length == 0){
-            this.readUserlist()
+            this.readUserlist();
         } 
     }
 };
