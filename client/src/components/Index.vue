@@ -19,6 +19,7 @@ export default {
             textfile: "",
             returnKey: "",
             returnVal: "",
+            optionStart: null
             }
         },
     methods: {
@@ -39,6 +40,7 @@ export default {
         },
         chooseUser: function (v) {
             this.userdir = v;
+            this.showUserPicker = false;
         },
         readUserlist: async function() {
             const url = "http://localhost:8008/users";
@@ -69,6 +71,7 @@ export default {
                 console.log(this.userdir);
             } catch (error) {
                 console.error(error.message);
+                this.userlist = [ 'pick', 'some', 'user' ];
                 this.showUserPicker = true;
             }
 
@@ -89,7 +92,9 @@ export default {
   <br>
   {{ vars }} <br>
   {{ filename }} <br>
-  {{ returnKey }} : {{ returnVal }}
+  {{ returnKey }} : {{ returnVal }} <br>
+  {{ userdir }}
+
   <router-view v-if="showProperties"
       :var="var"
       :item="item"
@@ -169,15 +174,15 @@ export default {
           Here
 
 
-            <div>
+            <div >
                 Select user from list : {{ userlist }} <br>
-            <select >
-              <option v-for="option in userlist" :key="option" >
+            <select name="user" id="user" v-model="optionStart">
+              <option v-for="option in userlist" :key="option" :value="option">
                 {{ option }}
               </option>
             </select>
           </div>
-
+            <button @click="chooseUser(optionStart)">choose {{ optionStart }}</button>
 
          </div>
 
