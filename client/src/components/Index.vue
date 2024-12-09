@@ -80,7 +80,7 @@ export default {
         //////////////////
         readConfigFile: async function() {
             const url = "http://localhost:8008/config";
-            const bodyObj = {"path": "/home/" + this.userdir + "/.llm.env"};
+            const bodyObj = {"path": "/home/" + this.userdir + "/" + this.filename};
             console.log(bodyObj)
             try {
                 const response = await fetch(url , {
@@ -119,7 +119,6 @@ export default {
 <template>
   <h1>{{ msg }}</h1>
   <br>
-  {{ vars }} <br>
   {{ filename }} <br>
   {{ returnKey }} : {{ returnVal }} <br>
   {{ userdir }}

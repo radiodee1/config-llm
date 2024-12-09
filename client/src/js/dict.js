@@ -28,7 +28,7 @@ const dict = {
         '--questions',
         '--pc'
     ],
-    filename: "~/.llm.env"
+    filename: ".llm.env"
 }
 
 export default dict
