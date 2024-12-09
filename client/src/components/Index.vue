@@ -32,7 +32,11 @@ export default {
         returnStringVar: function (v, x) {
             this.returnKey = v;
             this.returnVal = x;
-            this.writeConfigFile();
+            this.showProperties = false;
+            console.log(v, x);
+            this.insertVarInTextfile();
+            console.log(this.textfile);
+            this.writeConfigFile(); 
         },
         returnApply: function () {
             // like 'close' but saves file.
@@ -74,6 +78,11 @@ export default {
             } catch (error) {
                 console.error(error.message);
                 this.userlist = [ 'pick', 'some', 'user', 'like', 'dave' ];
+                
+                if (this.textfile.length == 0) {
+                    this.textfile = ` ENV_VAR=some values\nENV_VAR2=some other values`;
+                }
+
                 this.showUserPicker = true;
             }
 
@@ -121,7 +130,7 @@ export default {
             
             try {
                 const response = await fetch(url , {
-                    method: "POST",
+                    method: "PUT",
                     body: bodyObj,
                     headers: {
                         "Access-Control-Allow-Origin": "*",
@@ -140,6 +149,29 @@ export default {
                 console.error(error.message);
             }
 
+        },// end of function...
+        insertVarInTextfile: function () {
+            const key = this.returnKey;
+            const val = this.returnVal;
+            const list = this.textfile.split('\n');
+            var newlist = "";
+            var entered = false;
+            const newentry = key.trim() + "=" + val.trim();
+            for (let i in list) {
+                const l = list[i].trim();
+                if ( l.startsWith(key.trim()) && ! entered ) {
+                    //
+                    newlist += newentry + "\n";
+                    entered = true;
+                }
+                else {
+                    newlist += list[i] + "\n";
+                }
+            }
+            if (! entered) {
+                newlist += newentry + "\n"; // put it at the end!!
+            }
+            this.textfile = newlist;
         }// end of function...
 
     },
