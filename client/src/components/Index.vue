@@ -33,9 +33,7 @@ export default {
             this.returnKey = v;
             this.returnVal = x;
             this.showProperties = false;
-            console.log(v, x);
             this.insertVarInTextfile();
-            console.log(this.textfile);
             this.writeConfigFile();
             this.$forceUpdate(); // test
         },
@@ -45,7 +43,6 @@ export default {
         matchValue: function (v) {
             const vin = v.trim();
             const text = this.textfile;
-            console.log(text);
             const list = text.split('\n');
             if (list.length == 0) {
                 return "";
@@ -58,15 +55,13 @@ export default {
 
                 if ( z.length < 2 ) {
                     
-                    console.log(z, list);
                     continue ;
                 }
                 const key = z[0];
                 const kk = key.trim();
                 const val = z[1];
                 const vv = val.trim();
-                console.log(kk, vv);
-                if ( kk.startsWith(vin) && kk != "" ) {
+                if ( kk == vin  ) {
                     x = vv;
                 }
             }
