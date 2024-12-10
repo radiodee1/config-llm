@@ -225,6 +225,9 @@ export default {
 
       <table v-if="(! showUserPicker) && (! showProperties)">
           <tbody>
+
+          <!-- +++++++++++++++++++++ -->
+
           <tr>
           <td></td>
           <td>
@@ -239,53 +242,58 @@ export default {
           <td></td>
           </tr>
 
-
+          <!-- +++++++++++++++++++++ -->
           <tr 
           v-for="item in configs"
           key="item"
         >
-        <td> {{ matchValue(item) }} </td>
+        <td> {{ item }}={{ matchValue(item) }} </td>
         <td>
         <router-link to="/config" 
             @click="passStringVar(item, 'here again')"
             >
-            <button>Config {{ item }}</button>
+            <button> {{ item }}</button>
         </router-link>
         </td>
         <td> {{ item }} </td>
           </tr>
+        <!-- +++++++++++++++++++++ -->
 
         <tr 
           v-for="item in lists"
           key="item"
         >
-        <td> {{ matchValue(item) }} </td>
+        <td>  {{ item }}={{ matchValue(item) }} </td>
         <td>
       <router-link to="/list"
         @click="passStringVar(item, 'here')"
           >
-          <button>List {{ item }} </button>
+          <button> {{ item }} </button>
       </router-link>
         </td>
         <td> {{ item }}</td>
         </tr>
         
-        
+        <!-- +++++++++++++++++++++ -->
+
     <tr  
           v-for="item in vars"
           key="item"
         >
-        <td> {{ matchValue(item) }} </td>
+        <td>  {{ item }}={{ matchValue(item) }} </td>
         <td>
       <router-link 
           :to="{name:'variable'}" 
           @click="passStringVar(item, 'here')">
 
-          <button>Var {{ item }}</button><br>
+          <button> {{ item }}</button><br>
       </router-link>
         </td>
         <td>{{ item }}</td>
     </tr>
+
+        <!-- +++++++++++++++++++++ -->
+
       </tbody>
       </table>
 
