@@ -19,7 +19,8 @@ export default {
             textfile: ` ENV_VAR=some values\nENV_VAR2=some other values`,
             returnKey: "",
             returnVal: "",
-            optionStart: null
+            optionStart: null,
+            noBackend: true,
             }
         },
     methods: {
@@ -101,7 +102,8 @@ export default {
             } catch (error) {
                 console.error(error.message);
                 this.userlist = [ 'pick', 'some', 'user', 'like', 'dave' ];
-                
+                this.noBackend = true;
+
                 if (this.textfile.length == 0) {
                     this.textfile = ` ENV_VAR=some values\nENV_VAR2=some other values`;
                 }
@@ -113,9 +115,9 @@ export default {
         //////////////////
         readConfigFile: async function() {
             const url = "http://localhost:8008/config";
-            const bodyObj = {"path": "/home/" + this.userdir + "/" + this.filename};
+            const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.filename + "\"}";
             
-            //console.log(bodyObj)
+            console.log(bodyObj)
             
             try {
                 const response = await fetch(url , {
@@ -125,7 +127,7 @@ export default {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
                         "Access-Control-Allow-Headers": "X-Requested-With",
-                        "Content-Type": "text/plain"
+                        "Content-Type": "application/json"
                     }
                 });
                 if (!response.ok) {
@@ -133,7 +135,7 @@ export default {
                     return;
                 }
 
-                this.textfile = await response.json() ; 
+                this.textfile = await response.text() ; 
                 console.log(this.textfile) 
             } catch (error) {
                 console.error(error.message);
@@ -145,13 +147,14 @@ export default {
             if (this.textfile.length == 0) {
                 this.textfile = ` ENV_VAR=some values\nENV_VAR2=some other values`;
             }
-            const url = "http://localhost:8008/config";
-            const bodyObj = {
-                    "path": "/home/" + this.userdir + "/" + this.filename,
-                    "body": this.textfile
-                };
             
-            //console.log(bodyObj)
+            let text = this.textfile.replace(/\n/g, '\\n');
+            const url = "http://localhost:8008/config";
+            const bodyObj =  "{" +
+                    ' \"path\": "/home/' + this.userdir + "/" + this.filename + '\",'
+                    + '"body": \"' + text + '\"' + "}";
+            
+            console.log(bodyObj)
             
             try {
                 const response = await fetch(url , {
@@ -159,17 +162,17 @@ export default {
                     body: bodyObj,
                     headers: {
                         "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
                         "Access-Control-Allow-Headers": "X-Requested-With",
-                        "Content-Type": "text/plain"
+                        "Content-Type": "application/json"
                     }
                 });
                 if (!response.ok) {
                     throw new Error(`Response status: ${response.status}`);
                 }
 
-                //this.textfile = await response.json() ; 
-                console.log(this.textfile) 
+                //this.textfile = await response.text() ; 
+                //console.log(this.textfile) 
             } catch (error) {
                 console.error(error.message);
             }
@@ -197,7 +200,7 @@ export default {
                 newlist += newentry ; // put it at the end!!
             }
             this.textfile = newlist;
-            console.log(this.textfile);
+            //console.log(this.textfile);
             //this.$forceUpdate();
         }// end of function...
 

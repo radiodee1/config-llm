@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.post('/config', (req, res) => {
     const filepath = req.body.path;
+    console.log(filepath, req.body)
     if (! filepath.startsWith("/home/")) {
         res.send('');
         return;
