@@ -42,23 +42,26 @@ export default {
             // like 'close' but saves file.
         },
         matchValue: function (v) {
+            const vin = v.trim();
             const list = this.textfile.split('\n');
             if (list.length == 0) {
-                return v;
+                return "";
             }
             let x = "";
             for (let i in list) {
                 const linein = list[i];
                 const linev = linein.trim()
-                if ( linev.split("=").length == 1 ) {
+                if ( linev.split("=").length < 2 ) {
+                    
                     console.log(linev);
-                    return v;
+                    return "";
                 }
                 const key = linev.split("=")[0];
                 const kk = key.trim();
                 const val = linev.split("=")[1];
                 const vv = val.trim();
-                if (v == kk) {
+                console.log(kk, vv);
+                if (vin == kk ) {
                     x = vv;
                 }
             }
@@ -127,6 +130,7 @@ export default {
                 });
                 if (!response.ok) {
                     throw new Error(`Response status: ${response.status}`);
+                    return;
                 }
 
                 this.textfile = await response.json() ; 
@@ -164,7 +168,7 @@ export default {
                     throw new Error(`Response status: ${response.status}`);
                 }
 
-                this.textfile = await response.json() ; 
+                //this.textfile = await response.json() ; 
                 console.log(this.textfile) 
             } catch (error) {
                 console.error(error.message);
@@ -193,6 +197,8 @@ export default {
                 newlist += newentry ; // put it at the end!!
             }
             this.textfile = newlist;
+            console.log(this.textfile);
+            //this.$forceUpdate();
         }// end of function...
 
     },
@@ -208,18 +214,18 @@ export default {
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-  <br>
-  {{ filename }} <br>
-  {{ returnKey }} : {{ returnVal }} <br>
-  {{ userdir }}
-
   <router-view v-if="showProperties"
       :var="var"
       :item="item"
       :returnStringVar="returnStringVar"
       :returnApply="returnApply"
     />
+
+  <br>
+  <div v-if="(! showUserPicker) && (! showProperties)"> 
+  {{ returnKey }}={{ returnVal }} <br>
+  /home/{{ userdir }}/{{filename}} <br>
+  </div>
 
   <div class="card">
 
@@ -250,7 +256,7 @@ export default {
         <td> {{ item }}={{ matchValue(item) }} </td>
         <td>
         <router-link to="/config" 
-            @click="passStringVar(item, 'here again')"
+            @click="passStringVar(item, '')"
             >
             <button> {{ item }}</button>
         </router-link>
@@ -266,7 +272,7 @@ export default {
         <td>  {{ item }}={{ matchValue(item) }} </td>
         <td>
       <router-link to="/list"
-        @click="passStringVar(item, 'here')"
+        @click="passStringVar(item, '')"
           >
           <button> {{ item }} </button>
       </router-link>
