@@ -36,32 +36,37 @@ export default {
             console.log(v, x);
             this.insertVarInTextfile();
             console.log(this.textfile);
-            this.writeConfigFile(); 
+            this.writeConfigFile();
+            this.$forceUpdate(); // test
         },
         returnApply: function () {
             // like 'close' but saves file.
         },
         matchValue: function (v) {
             const vin = v.trim();
-            const list = this.textfile.split('\n');
+            const text = this.textfile;
+            console.log(text);
+            const list = text.split('\n');
             if (list.length == 0) {
                 return "";
             }
             let x = "";
             for (let i in list) {
                 const linein = list[i];
-                const linev = linein.trim()
-                if ( linev.split("=").length < 2 ) {
+                const linev = linein.trim();
+                const z = linev.split("=");
+
+                if ( z.length < 2 ) {
                     
-                    console.log(linev);
-                    return "";
+                    console.log(z, list);
+                    continue ;
                 }
-                const key = linev.split("=")[0];
+                const key = z[0];
                 const kk = key.trim();
-                const val = linev.split("=")[1];
+                const val = z[1];
                 const vv = val.trim();
                 console.log(kk, vv);
-                if (vin == kk ) {
+                if ( kk.startsWith(vin) && kk != "" ) {
                     x = vv;
                 }
             }
