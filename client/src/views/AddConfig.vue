@@ -9,6 +9,7 @@ export default {
     data() {
         return {
             msg: 'some thing',
+            inputText: null
         }
     }
 }
@@ -17,11 +18,19 @@ export default {
 
 <template>
   <div>
-      Config <br>
+      Config Variable <br>
       {{ var }} <br>
-      {{ item }}
+      {{ item }} <br>
+
+    <input v-model="inputText" placeholder="Paste text here" />
+        <p>You entered: {{ inputText }}</p>
+    <button @click="returnStringVar(this.var, this.inputText)">return and apply</button>
+
   </div>
 </template>
 
 <style scoped>
+input {
+    height: 30px;
+}
 </style>
