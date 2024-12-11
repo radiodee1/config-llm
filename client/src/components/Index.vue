@@ -16,7 +16,7 @@ export default {
             item: "",
             userdir: "",
             userlist: "",
-            textfile: ` ENV_VAR=some values\nENV_VAR2=some other values`,
+            textfile: "", //` ENV_VAR=some values\nENV_VAR2=some other values`,
             returnKey: "",
             returnVal: "",
             optionStart: null,
@@ -27,6 +27,9 @@ export default {
         passStringVar: function (v, x) {
             this.var = v;
             this.item = x;
+            if (this.item == "" || this.item == null) {
+                this.item = this.matchValue(this.var);
+            }
             this.showProperties = true;
             this.readConfigFile()
         },
@@ -154,7 +157,7 @@ export default {
                     ' \"path\": "/home/' + this.userdir + "/" + this.filename + '\",'
                     + '"body": \"' + text + '\"' + "}";
             
-            console.log(bodyObj)
+            //console.log(bodyObj)
             
             try {
                 const response = await fetch(url , {
@@ -179,6 +182,9 @@ export default {
 
         },// end of function...
         insertVarInTextfile: function () {
+            if (this.returnKey == null || this.returnVal == null) {
+                return;
+            }
             const key = this.returnKey;
             const val = this.returnVal;
             const list = this.textfile.split('\n');
@@ -217,6 +223,8 @@ export default {
 </script>
 
 <template>
+    <div class="card">
+
   <router-view v-if="showProperties"
       :var="var"
       :item="item"
@@ -230,7 +238,7 @@ export default {
   /home/{{ userdir }}/{{filename}} <br>
   </div>
 
-  <div class="card">
+  <div class="oldcard">
 
       <table v-if="(! showUserPicker) && (! showProperties)">
           <tbody>
@@ -264,7 +272,7 @@ export default {
             <button> {{ item }}</button>
         </router-link>
         </td>
-        <td> {{ item }} </td>
+        <td> </td>
           </tr>
         <!-- +++++++++++++++++++++ -->
 
@@ -280,7 +288,7 @@ export default {
           <button> {{ item }} </button>
       </router-link>
         </td>
-        <td> {{ item }}</td>
+        <td> </td>
         </tr>
         
         <!-- +++++++++++++++++++++ -->
@@ -293,12 +301,12 @@ export default {
         <td>
       <router-link 
           :to="{name:'variable'}" 
-          @click="passStringVar(item, 'here')">
+          @click="passStringVar(item, '')">
 
           <button> {{ item }}</button><br>
       </router-link>
         </td>
-        <td>{{ item }}</td>
+        <td> </td>
     </tr>
 
         <!-- +++++++++++++++++++++ -->
@@ -307,10 +315,10 @@ export default {
       </table>
 
       <div v-if="showUserPicker">
-          Here
+          
 
 
-            <div >
+            <div  >
                 Select user from list : {{ userlist }} <br>
             <select name="user" id="user" v-model="optionStart">
               <option v-for="option in userlist" :key="option" :value="option">
@@ -322,13 +330,17 @@ export default {
 
          </div>
 
-      <button v-if="showProperties && ! showUserPicker" @click="showProperties = false"> reset?? </button>
+      <button v-if="showProperties && ! showUserPicker" @click="showProperties = false"> return without saving </button>
   </div>
 
+    </div>
 </template>
 
 <style scoped>
 .read-the-docs {
   color: #888;
+}
+.card {
+    border: 3px solid black;
 }
 </style>

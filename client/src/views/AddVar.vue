@@ -20,14 +20,17 @@ export default {
   <div>
       Simple Variable <br>
       {{ var }} <br>
-      {{ item }}
+      {{ item }} <br>
 
-    <input v-model="inputText" placeholder="Enter text here" />
+    <input v-model="inputText" placeholder="Paste text here" />
         <p>You entered: {{ inputText }}</p>
-    <button @click="returnStringVar(this.var, this.inputText)">return</button>
+    <button @click="returnStringVar(this.var, this.inputText)">return and apply</button>
 
   </div>
 </template>
 
 <style scoped>
+input {
+    height: 30px;
+}
 </style>
