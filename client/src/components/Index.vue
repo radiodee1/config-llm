@@ -21,6 +21,7 @@ export default {
             returnVal: "",
             optionStart: null,
             noBackend: true,
+            testConfigInput : "'--file --temp 0.5     --loop_wait' "
             }
         },
     methods: {
@@ -230,6 +231,7 @@ export default {
       :item="item"
       :returnStringVar="returnStringVar"
       :returnApply="returnApply"
+      :options="options"
     />
 
   <br>
@@ -267,7 +269,7 @@ export default {
         <td> {{ item }}={{ matchValue(item) }} </td>
         <td>
         <router-link to="/config" 
-            @click="passStringVar(item, '')"
+            @click="passStringVar(item, testConfigInput)"
             >
             <button> {{ item }}</button>
         </router-link>
