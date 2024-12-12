@@ -16,7 +16,8 @@ export default {
             oldItemArray: null,
             oldItemPosition : null,
             consumeDone: false,
-            token: ""
+            token: "",
+            outputText: ""
         }
     },
     methods: {
@@ -51,8 +52,10 @@ export default {
             this.consumeDone = false;
             this.oldItemPosition = 0;
             let num = 0;
-            const end = this.oldItemArray.length + 1;
-            while (!this.consumeDone && this.oldItemPosition < this.oldItemArray.length && num < end ) {
+            const endloop = this.oldItemArray.length + 1;
+            while (!this.consumeDone && this.oldItemPosition < this.oldItemArray.length &&
+                    num < endloop ) {
+
                 this.consumeArgs();
                 this.consumeFlags();
                 num += 1;
@@ -89,10 +92,40 @@ export default {
             }
         },
         saveArgs : function (key, val) {
+            for (let i in this.options.args) {
+                const arg = this.options.args[i];
+                if ( arg.name == key ) {
+                    
+                    this.options.args[i].selected = ! this.options.args[i].selected;
+                    if (this.options.args[i].selected) {
+
+                        this.options.args[i].actual = val;
+                    }
+                    else {
+                        this.options.args[i].actual = "";
+                    }
+                    break;
+                }
+            }
             console.log(key, val);
         },
         saveFlags: function ( val ) {
+            for (let i in this.options.flags) {
+                const flag = this.options.flags[i];
+                if ( flag.name == val ) {
+                    this.options.flags[i].selected = ! this.options.flags[i].selected;
+                    break;
+                }
+            }
             console.log(val);
+
+        },
+        clickFlag: function (val) {
+            this.saveFlags(val);
+        },
+        clickArgs: function (key, val) {
+            this.saveArgs(key, val);
+            this.inputText = "";
         }
     },
     mounted () {
@@ -114,11 +147,36 @@ export default {
 
     <input v-model="inputText" placeholder="Paste text here" />
         <p>You entered: {{ inputText }}</p>
+
+        <table>
+        <tbody>
+            <tr>
+                <td>
+                    <div  v-for="option in options.flags" :class="{selected: option.selected}" >
+            <button @click="clickFlag(option.name)">
+                {{ option.name }} 
+
+            </button>
+        </div>
+                </td>
+                <td>
+
+                    <div :class="{selected: option.selected}"  v-for="option in options.args">
+            <button @click="clickArgs(option.name, inputText)">
+                {{ option.name }} {{ option.actual }}
+                <!-- input v-model="inputText" placeholder="Paste text here" / -->
+ 
+            </button>
+        </div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        <br>
+    <input v-model="outputText" placeholder="View output" />
+    <br><br>
     <button @click="returnStringVar(this.var, this.inputText)">return and apply</button>
 
-
-    <div v-for="option in options.flags"> {{ option.name }} </div>
-    <div v-for="option in options.args"> {{ option.name }} </div>
 
   </div>
 </template>
@@ -126,5 +184,11 @@ export default {
 <style scoped>
 input {
     height: 30px;
+}
+td {
+    vertical-align: top;
+}
+.selected {
+    border: 2px solid red;
 }
 </style>
