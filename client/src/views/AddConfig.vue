@@ -17,7 +17,8 @@ export default {
             oldItemPosition : null,
             consumeDone: false,
             token: "",
-            outputText: ""
+            outputText: "",
+            modelArgsArray: []
         }
     },
     methods: {
@@ -147,6 +148,9 @@ export default {
         }
     },
     mounted () {
+        for (let i in this.options.args) {
+            this.modelArgsArray.push('');
+        }
         this.nameListArgs = this.buildNameList(this.options.args);
         this.nameListFlags = this.buildNameList(this.options.flags);
         this.buildOldArray();
@@ -170,8 +174,8 @@ export default {
         <tbody>
             <tr>
                 <td>
-                    <div  v-for="option in options.flags" :class="{selected: option.selected}" >
-            <button @click="clickFlag(option.name)">
+                    <div  v-for="option in options.flags"  >
+            <button @click="clickFlag(option.name)" :class="{selected: option.selected}">
                 {{ option.name }} 
 
             </button>
@@ -180,8 +184,8 @@ export default {
                 </td>
                 <td>
 
-                    <div :class="{selected: option.selected}"  v-for="option in options.args">
-            <button @click="clickArgs(option.name, inputText)">
+                    <div  v-for="option in options.args">
+            <button @click="clickArgs(option.name, inputText)" :class="{selected: option.selected}" >
                 {{ option.name }} <div :v-if="option.selected">  {{ option.actual }} </div>
                 <!-- input v-model="inputText" placeholder="Paste text here" / -->
  
