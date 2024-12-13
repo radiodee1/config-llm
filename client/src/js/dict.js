@@ -83,7 +83,7 @@ const dict = {
         args: [
             {
                 name: '--voice',
-                selected: true, // will be changed at run time.
+                selected: false, // will be changed at run time.
                 grouped: true, // part of recomended configuration...
                 def: "female", // default argument
                 actual: "", // will be changed at run time.
@@ -92,7 +92,7 @@ const dict = {
 
             },            {
                 name: '--temp',
-                selected: true,
+                selected: false,
                 grouped: true,
                 def: "0.95",
                 actual: "",
@@ -101,7 +101,7 @@ const dict = {
 
             },            {
                 name: '--timeout',
-                selected: true,
+                selected: false,
                 grouped: true,
                 def: "0.5",
                 actual: "",
@@ -110,7 +110,7 @@ const dict = {
 
             },            {
                 name: '--mic_timeout',
-                selected: true,
+                selected: false,
                 grouped: true,
                 def: "20",
                 actual: "",
@@ -119,7 +119,7 @@ const dict = {
 
             },            {
                 name: '--questions',
-                selected: true,
+                selected: false,
                 grouped: true,
                 def: "10",
                 actual: "",

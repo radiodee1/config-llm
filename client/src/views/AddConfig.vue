@@ -95,14 +95,10 @@ export default {
             for (let i in this.options.args) {
                 const arg = this.options.args[i];
                 if ( arg.name == key ) {
-                    
-                    this.options.args[i].selected = ! this.options.args[i].selected;
-                    if (this.options.args[i].selected) {
+                    if (val != null && val != "" ) {
 
+                        this.options.args[i].selected = ! this.options.args[i].selected;
                         this.options.args[i].actual = val;
-                    }
-                    else {
-                        this.options.args[i].actual = "";
                     }
                     break;
                 }
@@ -126,6 +122,28 @@ export default {
         clickArgs: function (key, val) {
             this.saveArgs(key, val);
             this.inputText = "";
+        },
+        clickReturn: function () {
+            let text = "'" + this.outputText + "'";
+
+            this.returnStringVar(this.var, text);
+        },
+        buildOutput: function () {
+            let out = "";
+            for (let i in this.options.flags) {
+                const flag = this.options.flags[i];
+                if (flag.selected) {
+                    out += flag.name + " ";
+                }
+            }
+            for (let i in this.options.args) {
+                const arg = this.options.args[i];
+                if (arg.selected && arg.actual != null && arg.actual.trim() != "") {
+                    out += arg.name + " ";
+                    out += arg.actual + " ";
+                }
+            }
+            this.outputText = out;
         }
     },
     mounted () {
@@ -163,7 +181,7 @@ export default {
 
                     <div :class="{selected: option.selected}"  v-for="option in options.args">
             <button @click="clickArgs(option.name, inputText)">
-                {{ option.name }} {{ option.actual }}
+                {{ option.name }} <div :v-if="option.selected">  {{ option.actual }} </div>
                 <!-- input v-model="inputText" placeholder="Paste text here" / -->
  
             </button>
@@ -173,9 +191,10 @@ export default {
         </tbody>
         </table>
         <br>
+    <button @click="buildOutput()">build output</button>
     <input v-model="outputText" placeholder="View output" />
     <br><br>
-    <button @click="returnStringVar(this.var, this.inputText)">return and apply</button>
+    <button @click="clickReturn()">return and apply</button>
 
 
   </div>
