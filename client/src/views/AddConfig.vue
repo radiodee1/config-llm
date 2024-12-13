@@ -175,6 +175,7 @@ export default {
                 {{ option.name }} 
 
             </button>
+            {{ option.help }}
         </div>
                 </td>
                 <td>
@@ -185,6 +186,7 @@ export default {
                 <!-- input v-model="inputText" placeholder="Paste text here" / -->
  
             </button>
+            {{ option.help }}
         </div>
                 </td>
             </tr>
@@ -208,6 +210,6 @@ td {
     vertical-align: top;
 }
 .selected {
-    border: 2px solid red;
+    border: 2px solid blue;
 }
 </style>
