@@ -167,8 +167,8 @@ export default {
       {{ var }} <br>
       {{ item }} <br>
 
-    <input v-model="inputText" placeholder="Paste text here" />
-        <p>You entered: {{ inputText }}</p>
+    <!-- input v-model="inputText" placeholder="Paste text here" / -->
+        <!-- p>You entered: {{ inputText }}</p -->
 
         <table>
         <tbody>
@@ -184,12 +184,13 @@ export default {
                 </td>
                 <td>
 
-                    <div  v-for="option in options.args">
-            <button @click="clickArgs(option.name, inputText)" :class="{selected: option.selected}" >
-                {{ option.name }} <div :v-if="option.selected">  {{ option.actual }} </div>
-                <!-- input v-model="inputText" placeholder="Paste text here" / -->
- 
-            </button>
+                    <div  v-for="(option, index) in options.args" :key="index">
+            <button @click="clickArgs(options.args[index].name, modelArgsArray[index])" :class="{selected: options.args[index].selected}" >
+                {{ option.name }} <div :v-if="options.args[index].selected">  {{ option.actual }} </div>
+                
+            </button> 
+            <input v-model="modelArgsArray[index]" placeholder="Paste text here" />
+            <br>
             {{ option.help }}
         </div>
                 </td>
@@ -209,6 +210,7 @@ export default {
 <style scoped>
 input {
     height: 30px;
+    width: 100%;
 }
 td {
     vertical-align: top;
