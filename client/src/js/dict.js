@@ -20,62 +20,62 @@ const dict = {
                 name: '--file',
                 selected: false, // will be changed at run time...
                 grouped: true, // part of recomended configuration...
-                help: "Help text here."
+                help: "Save statistics in text file."
             },            
             {
                 name: '--local',
                 selected: false,
                 grouped: true,
-                help: "Help text here."
+                help: "Not implemented"
 
             },            
             {
                 name: '--loop_wait',
                 selected: false,
                 grouped: true,
-                help: "Help text here."
+                help: "Loop until input is detected."
 
             },            
             {
                 name: '--verbose',
                 selected: false,
                 grouped: true,
-                help: "Help text here."
+                help: "Use verbose mode."
 
             },            
             {
                 name: '--cloud_tts',
                 selected: false,
                 grouped: true,
-                help: "Help text here."
+                help: "Google Cloud Text to Speech."
 
             },            
             {
                 name: '--cloud_stt',
                 selected: false,
                 grouped: true,
-                help: "Help text here."
+                help: "Google Cloud Speech Recognition."
 
             },            
             {
                 name: '--truncate',
                 selected: false,
                 grouped: true,
-                help: "Help text here."
+                help: "Truncate model output."
 
             },            
             {
                 name: '--pc',
                 selected: false,
                 grouped: false,
-                help: "Help text here."
+                help: "Use prompt-completion for prompt. (Older models.)"
 
             },
             {
                 name: '--mics',
                 selected: false,
                 grouped: false,
-                help: "Help text here."
+                help: "Display microphone data and quit."
 
             }
 
@@ -88,7 +88,7 @@ const dict = {
                 def: "female", // default argument
                 actual: "", // will be changed at run time.
                 type: String,
-                help: "Help text here."
+                help: "Google Cloud TTS Voice Code."
 
             },            {
                 name: '--temp',
@@ -97,7 +97,7 @@ const dict = {
                 def: "0.95",
                 actual: "",
                 type: Number,
-                help: "Help text here."
+                help: "Temperature for LLM operation."
 
             },            {
                 name: '--timeout',
@@ -106,7 +106,7 @@ const dict = {
                 def: "0.5",
                 actual: "",
                 type: Number,
-                help: "Help text here."
+                help: "Loop minutes to timeout."
 
             },            {
                 name: '--mic_timeout',
@@ -115,7 +115,7 @@ const dict = {
                 def: "20",
                 actual: "",
                 type: Number,
-                help: "Help text here."
+                help: "Mic timeout in seconds."
 
             },            {
                 name: '--questions',
@@ -124,7 +124,7 @@ const dict = {
                 def: "10",
                 actual: "",
                 type: Number,
-                help: "Help text here."
+                help: "Simulate two parties with preset question list. Specify number of simulated questions."
 
             },            {
                 name: '--name',
@@ -133,7 +133,7 @@ const dict = {
                 def: "Jane",
                 actual: "",
                 type: String,
-                help: "Help text here."
+                help: "Define new name."
 
             },
 
