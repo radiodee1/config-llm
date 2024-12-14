@@ -101,6 +101,9 @@ export default {
                         this.options.args[i].selected = ! this.options.args[i].selected;
                         this.options.args[i].actual = val;
                     }
+                    if (! this.options.args[i].selected) {
+                        this.options.args[i].actual = "";
+                    }
                     break;
                 }
             }
