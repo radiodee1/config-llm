@@ -5,7 +5,7 @@ import dict from '../js/dict.js';
 export default {
     data() {
         return {
-            var: 'something', 
+            var: '', 
             vars: dict.var,
             configs: dict.config,
             lists: dict.list,

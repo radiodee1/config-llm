@@ -92,7 +92,7 @@ export default {
                 this.consumeDone = true;
             }
         },
-        saveArgs : function (key, val) {
+        saveArgsClick : function (key, val) {
             for (let i in this.options.args) {
                 const arg = this.options.args[i];
                 if ( arg.name == key ) {
@@ -106,7 +106,7 @@ export default {
             }
             console.log(key, val);
         },
-        saveFlags: function ( val ) {
+        saveFlagsClick: function ( val ) {
             for (let i in this.options.flags) {
                 const flag = this.options.flags[i];
                 if ( flag.name == val ) {
@@ -117,11 +117,37 @@ export default {
             console.log(val);
 
         },
+
+        saveArgs : function (key, val) {
+            for (let i in this.options.args) {
+                const arg = this.options.args[i];
+                if ( arg.name == key ) {
+                    if (val != null && val != "" ) {
+
+                        this.options.args[i].selected = true; 
+                        this.options.args[i].actual = val;
+                    }
+                    break;
+                }
+            }
+            console.log(key, val);
+        },
+        saveFlags: function ( val ) {
+            for (let i in this.options.flags) {
+                const flag = this.options.flags[i];
+                if ( flag.name == val ) {
+                    this.options.flags[i].selected = true; 
+                    break;
+                }
+            }
+            console.log(val);
+
+        },
         clickFlag: function (val) {
-            this.saveFlags(val);
+            this.saveFlagsClick(val);
         },
         clickArgs: function (key, val) {
-            this.saveArgs(key, val);
+            this.saveArgsClick(key, val);
             this.inputText = "";
         },
         clickReturn: function () {
@@ -216,6 +242,6 @@ td {
     vertical-align: top;
 }
 .selected {
-    border: 2px solid blue;
+    border: 6px solid blue;
 }
 </style>
