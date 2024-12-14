@@ -96,14 +96,21 @@ export default {
             for (let i in this.options.args) {
                 const arg = this.options.args[i];
                 if ( arg.name == key ) {
-                    if (val != null && val != "" ) {
+                    if (! this.options.args[i].selected  ) {
 
-                        this.options.args[i].selected = ! this.options.args[i].selected;
+                        this.options.args[i].selected = true; //! this.options.args[i].selected;
                         this.options.args[i].actual = val;
+                        break;
                     }
-                    if (! this.options.args[i].selected) {
+                    else if (this.options.args[i].selected) {
+                        this.options.args[i].selected = false;
+                        this.modelArgsArray[i] = this.options.args[i].actual;
                         this.options.args[i].actual = "";
+                        break;
                     }
+                    //if (! this.options.args[i].selected) {
+                    //    this.options.args[i].actual = val;
+                    //}
                     break;
                 }
             }
@@ -174,12 +181,32 @@ export default {
                 }
             }
             this.outputText = out;
+        },
+        setDefaultOptions: function () {
+            if (this.item != null && this.item.trim().length != 0) {
+                return;
+            }
+            for (let i in this.options.flags) {
+                this.options.flags[i].selected = this.options.flags[i].grouped;
+                //this.options.flags[i].actual = this.options.flags[i].def;
+                
+            }
+            for (let i in this.options.args) {
+                this.options.args[i].selected = this.options.args[i].grouped; 
+                if (this.options.args[i].selected) {
+                    this.options.args[i].actual = this.options.args[i].def;
+                    this.modelArgsArray[i] = this.options.args[i].def
+                }
+            //////////   
+            }
+
         }
     },
     mounted () {
         for (let i in this.options.args) {
             this.modelArgsArray.push('');
         }
+        this.setDefaultOptions();
         this.nameListArgs = this.buildNameList(this.options.args);
         this.nameListFlags = this.buildNameList(this.options.flags);
         this.buildOldArray();

@@ -37,6 +37,7 @@ export default {
         returnStringVar: function (v, x) {
             this.returnKey = v;
             this.returnVal = x;
+            this.var = x;
             this.showProperties = false;
             this.insertVarInTextfile();
             this.writeConfigFile();
@@ -269,7 +270,7 @@ export default {
         <td> {{ item }}={{ matchValue(item) }} </td>
         <td>
         <router-link to="/config" 
-            @click="passStringVar(item, testConfigInput)"
+            @click="passStringVar(item, this.item)"
             >
             <button> {{ item }}</button>
         </router-link>
