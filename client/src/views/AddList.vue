@@ -32,7 +32,7 @@ export default {
             if (out.endsWith(",")) {
                 out = out.slice(0,-1);
             }
-            this.inputText = out;
+            this.inputText = "'" + out + "'";
         }
     }
 }
