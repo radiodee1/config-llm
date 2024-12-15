@@ -161,6 +161,7 @@ export default {
             this.inputText = "";
         },
         clickReturn: function () {
+            this.buildOutput();
             let text = "'" + this.outputText + "'";
 
             this.returnStringVar(this.var, text);
