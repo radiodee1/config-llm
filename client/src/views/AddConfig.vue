@@ -161,7 +161,10 @@ export default {
             this.inputText = "";
         },
         clickReturn: function () {
-            this.buildOutput();
+            if (this.outputText == null || this.outputText.trim() == "") {
+                this.buildOutput();
+            }
+            
             let text = "'" + this.outputText + "'";
 
             this.returnStringVar(this.var, text);
