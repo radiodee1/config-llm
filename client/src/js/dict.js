@@ -77,6 +77,18 @@ const dict = {
                 grouped: false,
                 help: "Display microphone data and quit."
 
+            },
+            {
+                name: '--test',
+                selected: false,
+                grouped: false,
+                help: "Use test data and no LLM."
+            },
+            {
+                name: '--json',
+                selected: false,
+                grouped: false,
+                help: "Use json for model prompt."
             }
 
         ],
@@ -90,7 +102,8 @@ const dict = {
                 type: String,
                 help: "Google Cloud TTS Voice Code."
 
-            },            {
+            },            
+            {
                 name: '--temp',
                 selected: false,
                 grouped: true,
@@ -99,7 +112,8 @@ const dict = {
                 type: Number,
                 help: "Temperature for LLM operation."
 
-            },            {
+            },            
+            {
                 name: '--timeout',
                 selected: false,
                 grouped: true,
@@ -108,7 +122,8 @@ const dict = {
                 type: Number,
                 help: "Loop minutes to timeout."
 
-            },            {
+            },            
+            {
                 name: '--mic_timeout',
                 selected: false,
                 grouped: true,
@@ -117,16 +132,18 @@ const dict = {
                 type: Number,
                 help: "Mic timeout in seconds."
 
-            },            {
+            },            
+            {
                 name: '--questions',
                 selected: false,
-                grouped: true,
+                grouped: false,
                 def: "10",
                 actual: "",
                 type: Number,
                 help: "Simulate two parties with preset question list. Specify number of simulated questions."
 
-            },            {
+            },            
+            {
                 name: '--name',
                 selected: false,
                 grouped: false,
@@ -136,6 +153,27 @@ const dict = {
                 help: "Define new name."
 
             },
+            {
+                name: '--offset',
+                selected: false,
+                grouped: false,
+                def: "5",
+                actual: "",
+                type: Number,
+                help: "Time in seconds to offset on startup."
+
+            },
+            {
+                name: '--window',
+                selected: false,
+                grouped: false,
+                def: "35",
+                actual: "",
+                type: Number,
+                help: "Number of memory units used in input."
+
+            }
+
 
         ]
     }
