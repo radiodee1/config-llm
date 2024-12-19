@@ -118,6 +118,38 @@ export default {
 
         },// end of method??
         //////////////////
+        writeRestartFile: async function() {
+            const filename = ".llm.restart";
+            const url = "http://localhost:8008/restart";
+            const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + filename + "\"}";
+            
+            console.log(bodyObj)
+            
+            try {
+                const response = await fetch(url , {
+                    method: "POST",
+                    body: bodyObj,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Headers": "X-Requested-With",
+                        "Content-Type": "application/json"
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                    return;
+                }
+
+                this.textfile = await response.text() ; 
+                console.log(this.textfile) 
+            } catch (error) {
+                console.error(error.message);
+            }
+            //this.$forceUpdate();
+
+        },// end of function...
+
         readConfigFile: async function() {
             const url = "http://localhost:8008/config";
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.filename + "\"}";
