@@ -32,5 +32,6 @@ export default {
 <style scoped>
 input {
     height: 30px;
+    width: 100%;
 }
 </style>

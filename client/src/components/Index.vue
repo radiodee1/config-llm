@@ -348,6 +348,9 @@ export default {
 
       </tbody>
       </table>
+    
+      <br>
+      <button v-if="! showUserPicker"  @click="writeRestartFile()"> SCHEDULE RESTART </button>
 
       <div v-if="showUserPicker">
           
