@@ -60,7 +60,7 @@ const dict = {
             {
                 name: '--truncate',
                 selected: false,
-                grouped: true,
+                grouped: false,
                 help: "Truncate model output."
 
             },            
@@ -87,7 +87,7 @@ const dict = {
             {
                 name: '--json',
                 selected: false,
-                grouped: false,
+                grouped: true,
                 help: "Use json for model prompt."
             }
 
