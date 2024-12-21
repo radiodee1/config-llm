@@ -50,7 +50,7 @@ app.put('/config',  function (req, res)  {
     
     //req.body Object contains 'path' and 'body'
     const data = req.body.body;//JSON.stringify(req.body.body);//'body' is a sub Object of body !!
-    let text = data.replace(/[\\n]/g, '\r\n');
+    let text = data.replace(/[\\n]/g, '\n');
     console.log(text, fname)
 
     fs.writeFile(fname, text, 'utf8', (err) => {
