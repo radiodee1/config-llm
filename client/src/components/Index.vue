@@ -191,7 +191,7 @@ export default {
                  "body": text 
                 }
 
-            const bodyJson = JSON.stringify(bodyObj);
+            const bodyJson =  JSON.stringify(bodyObj);
             console.log(bodyJson);
             
             try {

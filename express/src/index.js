@@ -49,17 +49,18 @@ app.put('/config',  function (req, res)  {
     const fname = req.body.path;
     
     //req.body Object contains 'path' and 'body'
-    const data = req.body.body; // 'body' is a sub Object of body !!
+    const data = req.body.body;//JSON.stringify(req.body.body);//'body' is a sub Object of body !!
+    let text = data.replace(/[\\n]/g, '\n');
+    console.log(text, fname)
 
-    console.log(data, fname)
-    fs.writeFile(fname, data, (err) => {
-    if (err) {
-        console.error(err);
-        res.status(500).send('Error writing file');
-    } else {
-        res.send('Data saved successfully');
-    }
-  });
+    fs.writeFile(fname, text, 'utf8', (err) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error writing file');
+        } else {
+            res.send('Data saved successfully');
+        }
+    });
 })
 
 app.post('/restart', (req, res) => {
