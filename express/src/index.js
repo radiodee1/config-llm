@@ -82,18 +82,10 @@ app.post('/restart', (req, res) => {
         }
     });
    
-    //fs.readFile(filepath, 'utf8', (err, data) => {
-    //if (err) {
-    //    console.error(err);
-    //    return;
-    //}
-    //    console.log(data); // Prints the content of the file
-    //    res.send(data);
-    //});
-    //res.send('Hello World!');
 });
 
-
+// backup
+// restore
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -146,7 +146,6 @@ export default {
             } catch (error) {
                 console.error(error.message);
             }
-            //this.$forceUpdate();
 
         },// end of function...
 
@@ -187,16 +186,18 @@ export default {
             
             let text = this.textfile.replace(/\n/g, '\\n');
             const url = "http://localhost:8008/config";
-            const bodyObj =  "{" +
-                    ' \"path\": "/home/' + this.userdir + "/" + this.filename + '\",'
-                    + '"body": \"' + text + '\"' + "}";
-            
-            //console.log(bodyObj)
+            let bodyObj = {
+                "path": "/home/" + this.userdir + "/" + this.filename,
+                 "body": text 
+                }
+
+            const bodyJson = JSON.stringify(bodyObj);
+            console.log(bodyJson);
             
             try {
                 const response = await fetch(url , {
                     method: "PUT",
-                    body: bodyObj,
+                    body: bodyJson, // bodyObj,
                     headers: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
