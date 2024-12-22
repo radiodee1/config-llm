@@ -7,6 +7,56 @@ const fs = require('fs');
 const app = express();
 const port = 8008;
 
+function returnBackupString (num) {
+    const beginning = "llm.backup.";
+    const number_part = "000";
+    const end_part = ".txt";
+    const new_number_part = "00000" + String(num);
+    const trimmed_number_part = new_number_part.slice(new_number_part.length - 3, new_number_part.length )
+    console.log(trimmed_number_part);
+    return trimmed_number_part;
+}
+
+function returnBackupNumber (str) {
+    const beginning = "llm.backup.";
+    const number_part = "000";
+    const end_part = ".txt";
+
+    const part = str.slice(beginning.length, beginning.length + number_part.length);
+    console.log(part);
+
+    return Number(part);
+}
+
+function readDirForBackup(dirname) {
+    //const dirname = '/home/';
+    var filelist = "";
+    fs.readdir(dirname, (err, files) => {
+        
+    if (err) {
+        console.error('Error reading directories:', err);
+        return;
+    }
+        filelist = files;
+        //res.send(filelist);
+        //comma separated list of user directories.
+    })
+    let checkedlist = [];
+    for (let i in filelist) {
+        const f = filelist[i];
+        if (f.startsWith('llm.backup.') && f.endsWith(".txt")) {
+            checkedlist.push(f)
+        }
+    }
+    const c = checkedlist.toSorted();
+    const ctop = c[c.length - 1];
+    const cnum = returnBackupNumber(ctop);
+
+    return Number(cnum);
+}
+
+/////////////////////////
+
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -87,7 +137,29 @@ app.post('/restart', (req, res) => {
 
 // backup
 // restore
+app.post('/backup', (req, res) => {
+    const filepath = req.body.path;
+    console.log(filepath, req.body)
+    if (! filepath.startsWith("/home/")) {
+        res.send('');
+        return;
+    }
+    const path_part_array_with_name = filepath.split('/');
+    const path_part_array = path_part_array_with_name.slice(0, path_part_array_with_name.length - 1);
+    const old_filepath = '/' + path_part_array.join('/') + '/.llm.env';
+    const num = readDirForBackup(filepath);
+    const new_num = num + 1;
+    const new_filepath = returnBackupString(new_num);
+
+    console.log( old_filepath, new_filepath )
+    fs.copyFile(old_filepath, new_filepath, (err) => {
+        if (err) throw err;
+        console.log('source.txt was copied to destination.txt');
+    });  
+});
+
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
+    //console.log(returnBackupNumber("llm.backup.123.txt"));
 });
