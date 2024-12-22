@@ -240,7 +240,7 @@ export default {
             if (! entered) {
                 newlist += newentry ; // put it at the end!!
             }
-            this.textfile = newlist;
+            this.textfile = newlist.trim();
             //console.log(this.textfile);
             //this.$forceUpdate();
         }// end of function...
