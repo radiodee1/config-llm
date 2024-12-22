@@ -13,7 +13,7 @@ function returnBackupString (num) {
     const end_part = ".txt";
     const new_number_part = "00000" + String(num);
     const trimmed_number_part = new_number_part.slice(new_number_part.length - 3, new_number_part.length )
-    console.log(trimmed_number_part);
+    console.log(trimmed_number_part, 'string');
     return trimmed_number_part;
 }
 
@@ -23,14 +23,14 @@ function returnBackupNumber (str) {
     const end_part = ".txt";
 
     const part = str.slice(beginning.length, beginning.length + number_part.length);
-    console.log(part);
+    console.log(part, 'number');
 
     return Number(part);
 }
 
 function readDirForBackup(dirname) {
     //const dirname = '/home/';
-    var filelist = "";
+    let filelist = "";
     fs.readdir(dirname, (err, files) => {
         
     if (err) {
@@ -38,21 +38,24 @@ function readDirForBackup(dirname) {
         return;
     }
         filelist = files;
+        //console.log(filelist, 'here')    
         //res.send(filelist);
         //comma separated list of user directories.
-    })
-    let checkedlist = [ 'llm.backup.000.txt' ];
-    for (let i in filelist) {
-        const f = filelist[i];
-        if (f.startsWith('llm.backup.') && f.endsWith(".txt")) {
-            checkedlist.push(f)
+        let checkedlist = [ 'llm.backup.000.txt' ];
+        for (let i in filelist) {
+            const f = filelist[i];
+            if (f.startsWith('llm.backup.') && f.endsWith(".txt")) {
+                checkedlist.push(f)
+            }
         }
-    }
-    const c = checkedlist.toSorted();
-    const ctop = c[c.length - 1];
-    const cnum = returnBackupNumber(ctop);
+        //console.log("here", filelist, 'there');
+        const c = checkedlist.toSorted();
+        const ctop = c[c.length - 1];
+        const cnum = returnBackupNumber(ctop);
 
-    return Number(cnum);
+        return Number(cnum);
+
+    })
 }
 
 /////////////////////////
@@ -161,5 +164,5 @@ app.post('/backup', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
-    //console.log(returnBackupNumber("llm.backup.123.txt"));
+    //console.log(readDirForBackup('/home/dave/'));
 });
