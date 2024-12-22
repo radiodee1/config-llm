@@ -41,7 +41,7 @@ function readDirForBackup(dirname) {
         //res.send(filelist);
         //comma separated list of user directories.
     })
-    let checkedlist = [];
+    let checkedlist = [ 'llm.backup.000.txt' ];
     for (let i in filelist) {
         const f = filelist[i];
         if (f.startsWith('llm.backup.') && f.endsWith(".txt")) {
