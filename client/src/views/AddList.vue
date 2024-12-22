@@ -49,7 +49,7 @@ export default {
     <input v-model="this.modelArgsArray[index]" placeholder="Paste text here" />
     </div>
 
-    <button @click="addArgument()">add argument to list</button>
+    <button @click="addArgument()">add argument to list</button><br><br>
     <button @click="buildOutput()">build output string</button>
 
 

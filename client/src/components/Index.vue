@@ -76,6 +76,7 @@ export default {
         chooseUser: function (v) {
             this.userdir = v;
             this.showUserPicker = false;
+            this.readConfigFile();
         },
         readUserlist: async function() {
             const url = "http://localhost:8008/users";
@@ -98,6 +99,7 @@ export default {
                 if (this.userlist.length == 1 ) {
                     this.userdir = this.userlist[0];
                     this.showUserPicker = false;
+                    this.readConfigFile();
                 }
                 else {
                     this.showUserPicker = true;
@@ -192,7 +194,7 @@ export default {
                 }
 
             const bodyJson =  JSON.stringify(bodyObj);
-            console.log(bodyJson);
+            //console.log(bodyJson);
             
             try {
                 const response = await fetch(url , {
@@ -249,7 +251,8 @@ export default {
     mounted() {
         if (this.userlist.length == 0){
             this.readUserlist();
-        } 
+        }
+        
     },
     
 };
