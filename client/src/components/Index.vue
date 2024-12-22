@@ -1,6 +1,8 @@
 <script >
 
 import dict from '../js/dict.js';
+//import { useRouter } from 'vue-router';
+//const router = useRouter();
 
 export default {
     data() {
@@ -252,6 +254,7 @@ export default {
         if (this.userlist.length == 0){
             this.readUserlist();
         }
+        //router.replace('/home');
         
     },
     
