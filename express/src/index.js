@@ -178,7 +178,7 @@ app.post('/backup', (req, res) => {
     fs.copyFile(old_filepath, new_filepath, (err) => {
         if (err) throw err;
         console.log('source.txt was copied to destination.txt');
-        res.send("ok");
+        res.send(new_filepath);
     });  
 });
 
