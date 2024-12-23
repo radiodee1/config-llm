@@ -14,7 +14,7 @@ function returnBackupString (num) {
     const new_number_part = "00000" + String(num);
     const trimmed_number_part = new_number_part.slice(new_number_part.length - 3, new_number_part.length )
     console.log(trimmed_number_part, 'string');
-    return trimmed_number_part;
+    return beginning + trimmed_number_part + end_part;
 }
 
 function returnBackupNumber (str) {
@@ -164,5 +164,5 @@ app.post('/backup', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
-    //console.log(readDirForBackup('/home/dave/'));
+    console.log(returnBackupString(5));
 });
