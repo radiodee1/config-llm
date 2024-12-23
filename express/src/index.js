@@ -15,7 +15,7 @@ function returnBackupString (num) {
     const new_number_part = "00000" + String(num);
     //console.log(new_number_part, 'new_number_part')
     const trimmed_number_part = new_number_part.slice(new_number_part.length - 3, new_number_part.length )
-    console.log(trimmed_number_part, 'string');
+    //console.log(trimmed_number_part, 'string');
     return beginning + trimmed_number_part + end_part;
 }
 
@@ -158,14 +158,19 @@ app.post('/backup', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
     //console.log(filepath, req.body)
-    if (! filepath.startsWith("/home/")) {
+    if (! filepath.startsWith("/home/") ) {
         res.send('');
         return;
     }
     const path_part_array_with_name = filepath.split('/');
     //console.log(path_part_array_with_name)
-
-    const path_part_array = path_part_array_with_name.slice(0, path_part_array_with_name.length - 1);
+    let path_part_array = [];
+    if (path_part_array_with_name.length == 3) {
+        path_part_array = path_part_array_with_name;
+    }
+    if (path_part_array_with_name.length == 4) {
+        path_part_array = path_part_array_with_name.slice(0, path_part_array_with_name.length - 1);
+    }
     //console.log(path_part_array, 'path_part_array')
     const old_filepath = path_part_array.join('/') + '/.llm.env';
     const num = readDirForBackup(path_part_array.join('/'));
