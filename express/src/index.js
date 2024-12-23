@@ -168,8 +168,8 @@ app.post('/backup', (req, res) => {
     if (path_part_array_with_name.length == 3) {
         path_part_array = path_part_array_with_name;
     }
-    if (path_part_array_with_name.length == 4) {
-        path_part_array = path_part_array_with_name.slice(0, path_part_array_with_name.length - 1);
+    if (path_part_array_with_name.length >= 4) {
+        path_part_array = path_part_array_with_name.slice(0, 3);// path_part_array_with_name.length - 1);
     }
     //console.log(path_part_array, 'path_part_array')
     const old_filepath = path_part_array.join('/') + '/.llm.env';
