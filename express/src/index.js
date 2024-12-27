@@ -272,6 +272,7 @@ app.post('/listbackup', (req, res) => {
     }
     catch (err) {
         console.log(err.message);
+        res.send("bad listbackup");
         return;
     }
 })
