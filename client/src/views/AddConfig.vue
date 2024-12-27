@@ -271,6 +271,7 @@ export default {
             </button> 
             <input v-model="modelArgsArray[index]" placeholder="Paste text here" 
                 @click="clickInput(options.args[index].name)"
+                @keyup.enter="clickArgs(options.args[index].name, modelArgsArray[index])"
             />
             <br>
             {{ option.help }}
