@@ -1,8 +1,9 @@
 <script >
 
 import dict from '../js/dict.js';
-//import { useRouter } from 'vue-router';
-//const router = useRouter();
+
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 export default {
     data() {
@@ -49,6 +50,10 @@ export default {
         returnApply: function () {
             // like 'close' but saves file.
         },
+        startValues: function () {
+            this.$router.push('/home');
+            this.showProperties = true;
+        },
         matchValue: function (v) {
             const vin = v.trim();
             const text = this.textfile;
@@ -81,6 +86,7 @@ export default {
             this.showUserPicker = false;
             this.readConfigFile();
             this.envFile= `/home/${this.userdir}/${this.filename}`;
+            this.startValues();
             //this.$forceUpdate();
         },
         readUserlist: async function() {

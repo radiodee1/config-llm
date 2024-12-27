@@ -121,7 +121,7 @@ export default {
 
 <template>
   <div class="hometext">
-      Home <br>
+       <h1>Home </h1> <br>
 
     It is strongly recomended that you backup your configuration files before using this
     program. This code automatically writes over your configuration files. The file that
