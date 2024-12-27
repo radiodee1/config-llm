@@ -191,6 +191,43 @@ app.post('/backup', (req, res) => {
     });  
 });
 
+app.post('/restore', (req, res) => {
+    console.log("must provide full path to config file!!")
+    const filepath = req.body.path;
+    //console.log(filepath, req.body)
+    if (! filepath.startsWith("/home/") ) {
+        res.send('');
+        return;
+    }
+    const path_part_array_with_name = filepath.split('/');
+    //console.log(path_part_array_with_name)
+    let path_part_array = [];
+    if (path_part_array_with_name.length == 3) {
+        path_part_array = path_part_array_with_name;
+    }
+    if (path_part_array_with_name.length >= 4) {
+        path_part_array = path_part_array_with_name.slice(0, 3);// path_part_array_with_name.length - 1);
+    }
+    if (path_part_array_with_name.length < 3) {
+        res.send('');
+        return;
+    }
+    //console.log(path_part_array, 'path_part_array')
+    const old_filepath = path_part_array.join('/') + '/.llm.env';
+    const num = readDirForBackup(path_part_array.join('/'));
+    //console.log(num, 'num...')
+    const f_num = Number(num);
+    const new_num = f_num ;//+ 1;
+    const new_filepath =  path_part_array.join('/') + '/' + returnBackupString(new_num);
+
+    //console.log( old_filepath, new_filepath )
+    fs.copyFile(new_filepath, old_filepath, (err) => {
+        if (err) throw err;
+        console.log('source.txt was copied to destination.txt');
+        res.send(new_filepath);
+    });  
+});
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
