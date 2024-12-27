@@ -72,6 +72,39 @@ function readDirForBackup(dirname) {
 
 }
 
+function readDirForList(dirname) {
+    //const dirname = '/home/';
+    let filelist = "";
+    let filename = ".llm.env";
+    if (dirname.endsWith(filename)) {
+        const d = dirname.slice(0, dirname.length - filename.length);
+        dirname = d;
+        
+    }
+    //console.log(dirname, 'dirname');
+    let files = fs.readdirSync(dirname, (err, files) => {
+        
+        if (err) {
+            console.error('Error reading directories:', err);
+            return;
+        }
+    })
+
+    filelist = files;
+    let checkedlist = [  ];
+    for (let i in filelist) {
+        const f = filelist[i];
+        if (f.startsWith('llm.backup.') && f.endsWith(".txt") && f != "llm.backup.NaN.txt") {
+            checkedlist.push(f)
+        }
+    }
+    //console.log("here", filelist, 'there');
+    const c = checkedlist.toSorted();
+    //console.log(c)
+    return c;
+
+
+}
 /////////////////////////
 
 app.use(cors())
@@ -229,7 +262,21 @@ app.post('/restore', (req, res) => {
 });
 
 
+app.post('/listbackup', (req, res) => {
+    const dirname = req.body.path;
+    var filelist;
+    try {
+        filelist = readDirForList(dirname);
+        // encode filelist somehow here??
+        res.send(filelist);
+    }
+    catch (err) {
+        console.log(err.message);
+        return;
+    }
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
-    //console.log(readDirForBackup('/home/dave'));
+    //console.log(readDirForList('/home/dave'));
 });
