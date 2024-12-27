@@ -13,6 +13,7 @@ export default {
             lists: dict.list,
             options: dict.options,
             filename: dict.filename,
+            envFile: `/home/${this.userdir}/${this.filename}`,
             showUserPicker: false,
             showProperties: false,
             item: "",
@@ -79,6 +80,7 @@ export default {
             this.userdir = v;
             this.showUserPicker = false;
             this.readConfigFile();
+            this.envFile= `/home/${this.userdir}/${this.filename}`;
             //this.$forceUpdate();
         },
         readUserlist: async function() {
@@ -273,6 +275,8 @@ export default {
       :returnStringVar="returnStringVar"
       :returnApply="returnApply"
       :options="options"
+      :envFile="envFile"
+      :userdir="userdir"
     />
 
   <br>
