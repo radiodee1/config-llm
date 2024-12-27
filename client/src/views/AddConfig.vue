@@ -153,6 +153,21 @@ export default {
             console.log(val);
 
         },
+        saveInput : function (key ) {
+            for (let i in this.options.args) {
+                const arg = this.options.args[i];
+                if ( arg.name == key ) {
+                    if ( true ) {
+
+                        this.options.args[i].selected = false; 
+                        this.modelArgsArray[i] = this.options.args[i].actual ;
+                    }
+                    break;
+                }
+            }
+            console.log(key);
+        },
+
         clickFlag: function (val) {
             this.saveFlagsClick(val);
         },
@@ -168,6 +183,9 @@ export default {
             let text = "'" + this.outputText + "'";
 
             this.returnStringVar(this.var, text);
+        },
+        clickInput: function (key ) {
+            this.saveInput(key);
         },
         buildOutput: function () {
             let out = "";
@@ -245,11 +263,15 @@ export default {
                 <td>
 
                     <div  v-for="(option, index) in options.args" :key="index">
-            <button @click="clickArgs(options.args[index].name, modelArgsArray[index])" :class="{selected: options.args[index].selected}" >
+            <button @click="clickArgs(options.args[index].name, modelArgsArray[index])" 
+                :class="{selected: options.args[index].selected}" >
+
                 {{ option.name }} <div :v-if="options.args[index].selected">  {{ option.actual }} </div>
                 
             </button> 
-            <input v-model="modelArgsArray[index]" placeholder="Paste text here" />
+            <input v-model="modelArgsArray[index]" placeholder="Paste text here" 
+                @click="clickInput(options.args[index].name)"
+            />
             <br>
             {{ option.help }}
         </div>

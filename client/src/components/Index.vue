@@ -79,6 +79,7 @@ export default {
             this.userdir = v;
             this.showUserPicker = false;
             this.readConfigFile();
+            //this.$forceUpdate();
         },
         readUserlist: async function() {
             const url = "http://localhost:8008/users";
@@ -293,7 +294,7 @@ export default {
       <router-link :to="{name:'home'}"
           @click="passStringVar('home', 'there')"
           >
-          <button>Home</button>
+          <button>Home/Backup</button>
       </router-link><br>
 
       <router-link  to="/about"><button>About</button></router-link><br>
