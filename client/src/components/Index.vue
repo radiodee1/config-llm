@@ -404,7 +404,7 @@ export default {
 
          </div>
 
-      <button v-if="showProperties && ! showUserPicker" @click="showProperties = false; returnWithoutSaving()"> return without saving </button>
+      <button v-if="showProperties && ! showUserPicker" @click="showProperties = false; returnWithoutSaving()"> return (without saving) </button>
   </div>
 
     </div>
