@@ -2,6 +2,8 @@
 
 `Project to implement a config editing program for pi-llm.`
 
+---
+
 The idea behind this program is to provide a way to edit the config file for the pi-llm project. I want to make it so that the config can be changed here, and then the pi-llm code would see the change and start over and load the new config without stopping the program and re-starting it.
 
 This can be achieved by editing the pi-llm project slightly and coding this project to save all config changes immediately, so that the `~\.llm.env` file is updated often. 
