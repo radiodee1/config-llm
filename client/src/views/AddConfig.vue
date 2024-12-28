@@ -241,7 +241,7 @@ export default {
 
 <template>
   <div>
-      Config Variable <br>
+      <h1> Config Variable </h1> <br>
       {{ var }} <br>
       {{ item }} <br>
 

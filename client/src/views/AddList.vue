@@ -41,7 +41,7 @@ export default {
 
 <template>
   <div>
-      List Variable <br>
+      <h1> List Variable </h1> <br>
       {{ var }} <br>
       {{ item }} <br>
 

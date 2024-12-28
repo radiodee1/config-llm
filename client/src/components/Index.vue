@@ -288,7 +288,7 @@ export default {
   <br>
   <div v-if="(! showUserPicker) && (! showProperties)"> 
   {{ returnKey }}={{ returnVal }} <br>
-  /home/{{ userdir }}/{{filename}} <br>
+  <h1> /home/{{ userdir }}/{{filename}} </h1> <br>
   </div>
 
   <div class="oldcard">

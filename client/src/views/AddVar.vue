@@ -18,7 +18,7 @@ export default {
 
 <template>
   <div>
-      Simple Variable <br>
+      <h1> Simple Variable </h1> <br>
       {{ var }} <br>
       {{ item }} <br>
 
