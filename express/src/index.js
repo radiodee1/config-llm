@@ -145,7 +145,7 @@ app.get('/users', (req, res) => {
 })
 
 app.put('/config',  function (req, res)  {
-    const filename =   '/home/dave/test.txt';
+    //const filename =   '/home/dave/test.txt';
     const fname = req.body.path;
     
     //req.body Object contains 'path' and 'body'
