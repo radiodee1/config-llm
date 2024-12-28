@@ -371,7 +371,11 @@ export default {
       </table>
     
       <br>
-      <button v-if="(! showUserPicker) && (! showProperties)"  @click="writeRestartFile()"> SCHEDULE RESTART </button>
+      <button v-if="(! showUserPicker) && (! showProperties)"  @click="writeRestartFile()"> SCHEDULE RESTART </button> 
+
+      <div v-if="(! showUserPicker) && (! showProperties)" > <br> </div>
+      
+      <button v-if="(! showUserPicker) && (! showProperties)"  @click="readConfigFile()"> RELOAD CONFIG FILE </button>
 
       <div v-if="showUserPicker">
           

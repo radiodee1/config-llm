@@ -144,7 +144,8 @@ export default {
     <div class="outlined" >
         <pre> {{ prospectiveBackup }} </pre> 
         Note that 'xxx' is replaced by a number reflecting the size of the list of
-        backups that are already present. 
+        backups that are already present. You can and should look at your backups from
+        your home directory. 
         <button @click="this.backup()">make new backup</button><br>
     </div>
 
