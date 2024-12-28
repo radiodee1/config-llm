@@ -263,8 +263,6 @@ export default {
         if (this.userlist.length == 0){
             this.readUserlist();
         }
-        //router.replace('/home');
-        
     },
     
 };
