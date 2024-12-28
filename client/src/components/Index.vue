@@ -309,8 +309,19 @@ export default {
           >
           <button>Home/Backup</button>
       </router-link><br>
+          
+          </td>
+          </tr>
+          <tr>
+          
+          <td></td>
+          <td>
 
-      <router-link  to="/about"><button>About</button></router-link><br>
+      <router-link  :to="{'name':'about'}" 
+          @click="passStringVar('about', 'there')"
+          >
+          <button>About</button>
+      </router-link><br>
           </td>
           <td></td>
           </tr>
