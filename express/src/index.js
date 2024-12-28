@@ -263,7 +263,28 @@ app.post('/restore', (req, res) => {
 
 
 app.post('/listbackup', (req, res) => {
-    const dirname = req.body.path;
+    //const dirname = req.body.path;
+    const filepath = req.body.path;
+    //console.log(filepath, req.body)
+    if (! filepath.startsWith("/home/") ) {
+        res.send('');
+        return;
+    }
+    const path_part_array_with_name = filepath.split('/');
+    console.log(path_part_array_with_name, 'path_part_array_with_name');
+    let path_part_array = [];
+    if (path_part_array_with_name.length == 3) {
+        path_part_array = path_part_array_with_name;
+    }
+    if (path_part_array_with_name.length >= 4) {
+        path_part_array = path_part_array_with_name.slice(0, 3);// path_part_array_with_name.length - 1);
+    }
+    if (path_part_array_with_name.length < 3) {
+        res.send('');
+        return;
+    }
+    const dirname = path_part_array.join('/');
+    console.log(dirname, 'dirname');
     var filelist;
     try {
         filelist = readDirForList(dirname);
@@ -272,7 +293,7 @@ app.post('/listbackup', (req, res) => {
     }
     catch (err) {
         console.log(err.message);
-        res.send("bad listbackup");
+        res.send({ "message" :"bad listbackup"});
         return;
     }
 })

@@ -109,6 +109,7 @@ export default {
                 this.userlist = await response.json() ; 
                 if (this.userlist.length == 1 ) {
                     this.userdir = this.userlist[0];
+                    this.chooseUser(this.userlist[0]);
                     this.showUserPicker = false;
                     this.readConfigFile();
                 }

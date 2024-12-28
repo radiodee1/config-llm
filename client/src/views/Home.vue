@@ -45,13 +45,13 @@ export default {
                 console.error(error.message);
             }
             this.$forceUpdate();
-
+            this.getListBackup();
 
             console.log('backup');
         },
         restore: async function () {
             const url = "http://localhost:8008/restore";
-            const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.backupName + "\"}";
+            const bodyObj =  "{\"path\": \""   + this.backupName + "\"}";
             
             console.log(bodyObj)
             
@@ -83,8 +83,11 @@ export default {
             console.log(this.userdir);
         },
         getListBackup:  async function() {
+            if (this.backupName.trim().length == 0) {
+                this.backupName = '/home/' + this.userdir ; //+ "/.llm.env";
+            }
             const url = "http://localhost:8008/listbackup";
-            const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.backupName + "\"}";
+            const bodyObj =  "{\"path\": \""  + this.backupName + "\"}";
             
             console.log(bodyObj)
             
@@ -114,6 +117,9 @@ export default {
 
         },// end of function...
 
+    },
+    mounted () {
+        this.getListBackup()
     }
 }
 
