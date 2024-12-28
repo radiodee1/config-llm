@@ -25,7 +25,7 @@ export default {
             returnVal: "",
             optionStart: null,
             noBackend: true,
-            testConfigInput : "'--file --temp 0.5     --loop_wait' "
+            testConfigInput : "", // "'--file --temp 0.5     --loop_wait' "
             }
         },
     methods: {
@@ -372,7 +372,7 @@ export default {
 
       <div v-if="showUserPicker">
           
-
+            <h1> Choose User Dir </h1>
 
             <div  >
                 Select user from list : {{ userlist }} <br>
