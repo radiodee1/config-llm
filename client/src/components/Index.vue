@@ -54,6 +54,10 @@ export default {
             this.$router.push('/home');
             this.showProperties = true;
         },
+        returnWithoutSaving: function () {
+            this.showProperties = false;
+            this.readConfigFile();
+        },
         matchValue: function (v) {
             const vin = v.trim();
             const text = this.textfile;
@@ -313,15 +317,15 @@ export default {
 
           <!-- +++++++++++++++++++++ -->
           <tr 
-          v-for="item in configs"
-          key="item"
+          v-for="itemx in configs"
+          key="itemx"
         >
-        <td> {{ item }}={{ matchValue(item) }} </td>
+        <td> {{ itemx }}={{ matchValue(itemx) }} </td>
         <td>
         <router-link to="/config" 
-            @click="passStringVar(item, this.item)"
+            @click="passStringVar(itemx, matchValue(itemx))"
             >
-            <button> {{ item }}</button>
+            <button> {{ itemx }}</button>
         </router-link>
         </td>
         <td> </td>
@@ -335,7 +339,7 @@ export default {
         <td>  {{ item }}={{ matchValue(item) }} </td>
         <td>
       <router-link to="/list"
-        @click="passStringVar(item, '')"
+        @click="passStringVar(item, matchValue(item))"
           >
           <button> {{ item }} </button>
       </router-link>
@@ -353,7 +357,7 @@ export default {
         <td>
       <router-link 
           :to="{name:'variable'}" 
-          @click="passStringVar(item, '')">
+          @click="passStringVar(item, matchValue(item))">
 
           <button> {{ item }}</button><br>
       </router-link>
@@ -385,7 +389,7 @@ export default {
 
          </div>
 
-      <button v-if="showProperties && ! showUserPicker" @click="showProperties = false"> return without saving </button>
+      <button v-if="showProperties && ! showUserPicker" @click="showProperties = false; returnWithoutSaving()"> return without saving </button>
   </div>
 
     </div>

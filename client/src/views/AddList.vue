@@ -34,7 +34,11 @@ export default {
             }
             this.inputText = "'" + out + "'";
         }
+    },
+    mounted () {
+        this.inputText = this.item;
     }
+
 }
 
 </script>

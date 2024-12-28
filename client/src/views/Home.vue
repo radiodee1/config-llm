@@ -50,8 +50,13 @@ export default {
             console.log('backup');
         },
         restore: async function () {
+
+            const backupNameArray = this.backupName.split('/');
+            if (backupNameArray.length > 1) {
+                this.backupName = backupNameArray[ backupNameArray.length - 1 ];
+            }
             const url = "http://localhost:8008/restore";
-            const bodyObj =  "{\"path\": \""   + this.backupName + "\"}";
+            const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.backupName + "\"}";
             
             console.log(bodyObj)
             

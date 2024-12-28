@@ -11,6 +11,9 @@ export default {
             msg: 'some thing',
             inputText: null
         }
+    },
+    mounted () {
+        this.inputText = this.item;
     }
 }
 
