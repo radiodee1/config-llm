@@ -4,6 +4,7 @@ export default {
     props: {
         var: String,
         item: String,
+        userdir: String,
         returnStringVar: Function
     },
     data() {
@@ -22,20 +23,54 @@ export default {
         handleFileChange : function (event) {
           this.file = event.target.files[0];
           this.filename = event.target.files[0].name;
+          console.log(this.file.text());
         },
         uploadFile: async function () {
           if (!this.file) return;
+          //let text = this.file.replace(/\n/g, '\\n');
+  
+          const url = "http://localhost:8008/credential";
+          
+          //formData.append('file', this.file);
+          //formData.append("filename", "/home/" + this.userdir + "/.llm." + this.var + ".json");
+          const form = {
+            "destination":  "/home/" + this.userdir + "/.llm." + this.var + ".json",
+            //"file": this.file  
+          }
 
           const formData = new FormData();
-          formData.append('file', this.file);
+          formData.append('file', this.file)
 
-          try {
-            const response = await axios.post('/api/upload', formData);
-            console.log('File uploaded successfully:', response.data);
-          } catch (error) {
-            console.error('Error uploading file:', error);
+          for ( const [key, val] of Object.entries(form) ) {
+            formData.append(key, val);
           }
-        },
+
+          console.log(formData.get("filename"), 'formData')
+
+            try {
+                const response = await fetch(url , {
+                    method: "PUT",
+                    body: formData, // JSON.stringify(formData), 
+                    //mode: 'cors',
+                    //headers: {
+                    //    "Access-Control-Allow-Origin": "*",
+                    //    "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
+                    //    "Access-Control-Allow-Headers": "X-Requested-With",
+                    //    "Content-Type": "multipart/form-data"
+                    //}
+                });
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+
+                //this.textfile = await response.text() ; 
+                //console.log(this.textfile) 
+            } catch (error) {
+                console.error(error.message);
+            }
+
+        },// end function here...
+
     },
     mounted () {
         this.inputText = this.item;

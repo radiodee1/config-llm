@@ -7,6 +7,10 @@ const fs = require('fs');
 const app = express();
 const port = 8008;
 
+const multer = require('multer');
+const storage = multer.memoryStorage()
+const upload = multer({storage: storage}); // Specify the upload directory
+
 function returnBackupString (num) {
     //console.log(num, "num")
     const beginning = "llm.backup.";
@@ -302,6 +306,49 @@ app.post('/listbackup', (req, res) => {
 
 // copy file 
 // copy json credential file
+
+app.put('/file',  upload.single('file'), function (req, res)  {
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    // Access the file details
+    const { originalname, path } = req.file;
+
+    // Optionally move the file to a different location
+    const newPath = req.body.path; //`/tmp/${originalname}`;
+    //const filename =   '/home/dave/test.txt';
+    fs.rename(path, newPath, (err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error moving file.');
+        }
+
+        res.send('File uploaded successfully!');
+    });
+});
+
+app.put('/credential' , upload.any() , (req, res) => {
+    
+    const newPath = req.body.destination;
+    console.log(newPath, 'newPath');
+    const xdata =  req.files[0];
+    console.log(xdata)
+    const fileBuffer = xdata.buffer ;
+    const fileContent = fileBuffer.toString('utf-8');
+    
+    fs.writeFile(newPath, fileContent, (err) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error writing file');
+        } else {
+            res.send('Data saved successfully');
+        }
+    });
+ 
+})
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
