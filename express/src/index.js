@@ -187,6 +187,8 @@ app.post('/restart', (req, res) => {
 
 // backup
 // restore
+// listbackup
+
 app.post('/backup', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
@@ -297,6 +299,9 @@ app.post('/listbackup', (req, res) => {
         return;
     }
 })
+
+// copy file 
+// copy json credential file
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
