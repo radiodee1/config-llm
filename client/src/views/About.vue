@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="abouttext">
       <h1> About </h1>
 
 
@@ -20,4 +20,9 @@ The pi-llm project uses a wifi connenction on the raspberry pi to access AI Api'
 </template>
 
 <style scoped>
+
+.abouttext {
+    width: 400px;
+}
+
 </style>
