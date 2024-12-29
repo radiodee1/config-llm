@@ -14,6 +14,8 @@ export default {
             lists: dict.list,
             options: dict.options,
             filename: dict.filename,
+            creds: dict.cred,
+            files: dict.file,
             envFile: `/home/${this.userdir}/${this.filename}`,
             showUserPicker: false,
             showProperties: false,
@@ -360,7 +362,7 @@ export default {
         
         <!-- +++++++++++++++++++++ -->
 
-    <tr  
+        <tr  
           v-for="item in vars"
           key="item"
         >
@@ -377,6 +379,42 @@ export default {
     </tr>
 
         <!-- +++++++++++++++++++++ -->
+        <tr  
+          v-for="item in creds"
+          key="item"
+        >
+        <td>  {{ item }}={{ matchValue(item) }} </td>
+        <td>
+      <router-link 
+          :to="{name:'cred'}" 
+          @click="passStringVar(item, matchValue(item))">
+
+          <button> {{ item }}</button><br>
+      </router-link>
+        </td>
+        <td> </td>
+    </tr>
+
+        <!-- +++++++++++++++++++++ -->
+        <tr  
+          v-for="item in files"
+          key="item"
+        >
+        <td>  {{ item }}={{ matchValue(item) }} </td>
+        <td>
+      <router-link 
+          :to="{name:'file'}" 
+          @click="passStringVar(item, matchValue(item))">
+
+          <button> {{ item }}</button><br>
+      </router-link>
+        </td>
+        <td> </td>
+    </tr>
+
+        <!-- +++++++++++++++++++++ -->
+
+
 
       </tbody>
       </table>

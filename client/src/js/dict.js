@@ -4,14 +4,19 @@ const dict = {
         'OPENAI_MODEL',
         'OPENAI_MODEL_FINETUNE',
         'OPENAI_API_KEY',
-        'OPENAI_ORGANIZATION',
-        'GOOGLE_APPLICATION_CREDENTIALS'
+        'OPENAI_ORGANIZATION'
     ],
     config : [
         'PROJECT_LAUNCH_ARGS'
     ],
     list : [
         'OPENAI_CHECKPOINTS'
+    ],
+    cred : [
+        'GOOGLE_APPLICATION_CREDENTIALS'
+    ],
+    file : [
+        'FILE'
     ],
     filename: ".llm.env",
     options: {

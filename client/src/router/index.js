@@ -6,6 +6,8 @@ import About from '../views/About.vue'
 import Config from '../views/AddConfig.vue'
 import List from '../views/AddList.vue'
 import Var from '../views/AddVar.vue'
+import Cred from '../views/AddCreds.vue'
+import File from '../views/AddFile.vue'
 
 const routes = [
 
@@ -14,6 +16,8 @@ const routes = [
     { path: '/config', name: 'config', component: Config },
     { path: '/list', name: 'list', component: List },
     { path: '/variable', name: 'variable', component: Var },
+    { path: '/cred', name: 'cred', component: Cred },
+    { path: '/file', name: 'file', component: File }
 
 ]
 
