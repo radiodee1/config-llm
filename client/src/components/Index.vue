@@ -26,7 +26,7 @@ export default {
             returnKey: "",
             returnVal: "",
             optionStart: null,
-            noBackend: true,
+            noBackend: false,
             testConfigInput : "", // "'--file --temp 0.5     --loop_wait' "
             }
         },
@@ -298,6 +298,7 @@ export default {
       :options="options"
       :envFile="envFile"
       :userdir="userdir"
+      :noBackend="noBackend"
     />
 
   <br>
