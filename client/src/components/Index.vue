@@ -170,6 +170,10 @@ export default {
         },// end of function...
 
         readConfigFile: async function() {
+            if (this.noBackend == true) {
+                console.log("no backend");
+                return;
+            }
             const url = "http://localhost:8008/config";
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.filename + "\"}";
             
@@ -195,11 +199,17 @@ export default {
                 //console.log(this.textfile) 
             } catch (error) {
                 console.error(error.message);
+                this.noBackend = true;
             }
             this.$forceUpdate();
 
         },// end of function...
         writeConfigFile: async function() {
+            if (this.noBackend == true) {
+                console.log ('no backend');
+                return;
+            }
+
             if (this.textfile.length == 0) {
                 this.textfile = ` ENV_VAR=some values\nENV_VAR2=some other values`;
             }
