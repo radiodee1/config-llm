@@ -3,7 +3,6 @@ const express = require('express');
 var cors = require('cors')
 
 const fs = require('fs');
-//const path = require('path');
 const app = express();
 const port = 8008;
 
@@ -253,10 +252,6 @@ app.post('/restore', (req, res) => {
     }
     //console.log(path_part_array, 'path_part_array')
     const old_filepath = path_part_array.join('/') + '/.llm.env';
-    //const num = readDirForBackup(path_part_array.join('/'));
-    //console.log(num, 'num...')
-    //const f_num = Number(num);
-    //const new_num = f_num ;//+ 1;
     const new_filepath = path_part_array_with_name.join('/');
 
     console.log( new_filepath, old_filepath );
