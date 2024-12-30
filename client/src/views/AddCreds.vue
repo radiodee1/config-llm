@@ -62,6 +62,7 @@ export default {
                 if (!response.ok) {
                     throw new Error(`Response status: ${response.status}`);
                 }
+                this.returnStringVar(this.var, form["destination"]);
 
                 //this.textfile = await response.text() ; 
                 //console.log(this.textfile) 

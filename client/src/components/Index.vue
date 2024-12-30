@@ -192,7 +192,7 @@ export default {
                 }
 
                 this.textfile = await response.text() ; 
-                console.log(this.textfile) 
+                //console.log(this.textfile) 
             } catch (error) {
                 console.error(error.message);
             }

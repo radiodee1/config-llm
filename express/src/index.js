@@ -307,26 +307,24 @@ app.post('/listbackup', (req, res) => {
 // copy file 
 // copy json credential file
 
-app.put('/file',  upload.single('file'), function (req, res)  {
-    if (!req.file) {
-        return res.status(400).send('No file uploaded.');
-    }
-
-    // Access the file details
-    const { originalname, path } = req.file;
-
-    // Optionally move the file to a different location
-    const newPath = req.body.path; //`/tmp/${originalname}`;
-    //const filename =   '/home/dave/test.txt';
-    fs.rename(path, newPath, (err) => {
+app.put('/file',  upload.any(), function (req, res)  {
+    
+    const newPath = req.body.destination;
+    console.log(newPath, 'newPath');
+    const xdata =  req.files[0];
+    console.log(xdata)
+    const fileBuffer = xdata.buffer ;
+    const fileContent = fileBuffer; // name change
+    
+    fs.writeFile(newPath, fileContent, (err) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Error moving file.');
+            res.status(500).send('Error writing file');
+        } else {
+            res.send('Data saved successfully');
         }
-
-        res.send('File uploaded successfully!');
     });
-});
+ });
 
 app.put('/credential' , upload.any() , (req, res) => {
     
