@@ -178,6 +178,7 @@ export default {
         readConfigFile: async function() {
             if (this.noBackend == true) {
                 console.log("no backend");
+                this.showToast();
                 return;
             }
             const url = "http://localhost:8008/config";
@@ -213,6 +214,7 @@ export default {
         writeConfigFile: async function() {
             if (this.noBackend == true) {
                 console.log ('no backend');
+                this.showToast();
                 return;
             }
 
