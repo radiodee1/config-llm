@@ -167,8 +167,8 @@ export default {
                     return;
                 }
 
-                this.textfile = await response.text() ; 
-                console.log(this.textfile) 
+                //this.textfile = await response.text() ; 
+                //console.log(this.textfile) 
             } catch (error) {
                 console.error(error.message);
             }
