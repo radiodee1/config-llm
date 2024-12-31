@@ -1,4 +1,4 @@
-FROM node:21-alpine3.20 
+FROM node:23-alpine3.20 
 #FROM ubuntu:24.04 AS builder
 
 #RUN apt-get update && apt-get install -y locales  \
