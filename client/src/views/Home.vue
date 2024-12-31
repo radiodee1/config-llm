@@ -1,5 +1,7 @@
 <script >
 
+const host = "127.0.0.1"
+
 export default {
     props: {
         var: String,
@@ -18,7 +20,7 @@ export default {
     },
     methods: {
         backup: async function () {
-            const url = "http://localhost:8008/backup";
+            const url = `http://${host}:8008/backup`;
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/.llm.env\"}";
             
             console.log(bodyObj)
@@ -55,7 +57,7 @@ export default {
             if (backupNameArray.length > 1) {
                 this.backupName = backupNameArray[ backupNameArray.length - 1 ];
             }
-            const url = "http://localhost:8008/restore";
+            const url = `http://${host}:8008/restore`;
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.backupName + "\"}";
             
             console.log(bodyObj)
@@ -91,7 +93,7 @@ export default {
             if (this.backupName.trim().length == 0) {
                 this.backupName = '/home/' + this.userdir ; //+ "/.llm.env";
             }
-            const url = "http://localhost:8008/listbackup";
+            const url = `http://${host}:8008/listbackup`;
             const bodyObj =  "{\"path\": \""  + this.backupName + "\"}";
             
             console.log(bodyObj)

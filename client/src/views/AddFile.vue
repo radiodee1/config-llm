@@ -1,5 +1,7 @@
 <script >
 
+const host = "127.0.0.1"
+
 export default {
     props: {
         var: String,
@@ -29,7 +31,7 @@ export default {
           if (!this.file) return;
           //let text = this.file.replace(/\n/g, '\\n');
   
-          const url = "http://localhost:8008/file";
+          const url = `http://${host}:8008/file`;
           
           //formData.append('file', this.file);
           //formData.append("filename", "/home/" + this.userdir + "/.llm." + this.var + ".json");
