@@ -4,6 +4,10 @@ import './style.css'
 import router from './router/index.js'
 import Index from './components/Index.vue'
 
+import Toast , { POSITION } from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
+
 createApp(Index)
 .use(router)
+.use(Toast , { position: POSITION.BOTTOM_CENTER })
 .mount('#app')

@@ -5,6 +5,9 @@ import dict from '../js/dict.js';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+
 export default {
     data() {
         return {
@@ -95,6 +98,9 @@ export default {
             this.startValues();
             //this.$forceUpdate();
         },
+        showToast: function () {
+            toast.error("No Backend");
+        },
         readUserlist: async function() {
             const url = "http://localhost:8008/users";
             try {
@@ -128,7 +134,7 @@ export default {
                 console.error(error.message);
                 this.userlist = [ 'pick', 'some', 'user', 'like', 'dave' ];
                 this.noBackend = true;
-
+                this.showToast();
                 if (this.textfile.length == 0) {
                     this.textfile = ` ENV_VAR=some values\nENV_VAR2=some other values`;
                 }
