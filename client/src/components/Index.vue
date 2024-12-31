@@ -2,11 +2,11 @@
 
 import dict from '../js/dict.js';
 
-import { useRouter } from 'vue-router';
-const router = useRouter();
+//import { useRouter } from 'vue-router';
+//const router = useRouter();
 
-import { useToast } from 'vue-toastification'
-const toast = useToast()
+import { toast } from 'vue3-toastify';
+//const toast = useToast();
 
 export default {
     data() {
@@ -99,7 +99,7 @@ export default {
             //this.$forceUpdate();
         },
         showToast: function () {
-            toast.error("No Backend");
+            toast("No Backend");
         },
         readUserlist: async function() {
             const url = "http://localhost:8008/users";

@@ -4,10 +4,10 @@ import './style.css'
 import router from './router/index.js'
 import Index from './components/Index.vue'
 
-import Toast , { POSITION } from 'vue-toastification'
-import 'vue-toastification/dist/index.css'
+import Vue3Toastify from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 createApp(Index)
 .use(router)
-.use(Toast , { position: POSITION.BOTTOM_CENTER })
+.use(Vue3Toastify , { autoClose: 3000, position: "top-right" })
 .mount('#app')
