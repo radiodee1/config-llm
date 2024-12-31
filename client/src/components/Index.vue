@@ -99,7 +99,7 @@ export default {
             //this.$forceUpdate();
         },
         showToast: function () {
-            toast("No Backend");
+            toast.error("No Backend: No data will be read or saved.");
         },
         readUserlist: async function() {
             const url = "http://localhost:8008/users";
