@@ -7,7 +7,7 @@ services:
         build: express/.
         ports:
             - "8008:8008"
-
+        network_mode: host
         volumes:
             - /home:/home
 
