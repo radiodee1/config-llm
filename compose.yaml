@@ -3,15 +3,19 @@ services:
         build: client/.
         ports:
             - "5173:5173"
-        network_mode: host 
+        networks: 
+            - mynetwork 
     server:
         build: express/.
         ports:
             - "8008:8008"
-        network_mode: host
+        networks: 
+            - mynetwork
         volumes:
             - /home:/home
 
 volumes:
     home:
 
+networks:
+    mynetwork:
