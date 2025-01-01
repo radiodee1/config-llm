@@ -5,6 +5,7 @@ var cors = require('cors')
 const fs = require('fs');
 const app = express();
 const port = 8008;
+const host = "127.0.0.1";
 
 const multer = require('multer');
 const storage = multer.memoryStorage()
@@ -343,7 +344,7 @@ app.put('/credential' , upload.any() , (req, res) => {
 
 
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+app.listen(port, host, () => {
+    console.log(`Example app listening at http://${host}:${port}`);
     //console.log(readDirForList('/home/dave'));
 });
