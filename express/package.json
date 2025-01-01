@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
-    "start": " node -r dotenv/config src/index.js dotenv_config_path=../env"
+    "start": " node -r dotenv/config src/index.js dotenv_config_path=../client/.env"
   },
   "author": "David Liebman",
   "license": "ISC",

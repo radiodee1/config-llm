@@ -7,8 +7,15 @@ import dict from '../js/dict.js';
 
 import { toast } from 'vue3-toastify';
 //const toast = useToast();
+//const path = require('path')
+//import path from 'path-browserify'
+//import dotenv from 'dotenv'
 
-const host = "127.0.0.1"
+//dotenv.config()
+
+const host =  import.meta.env.VITE_HOST;
+
+console.log(host);
 
 export default {
     data() {
