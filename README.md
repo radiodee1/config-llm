@@ -28,6 +28,8 @@ docker image prune -a
 
 docker image rmi --force $(docker images -a -q)
 
+sudo docker image rmi --force $(sudo docker images -a -q)
+
 sudo docker build -t config-llm .
 
 sudo docker run -it config-llm bash
