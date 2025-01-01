@@ -4,7 +4,7 @@
   "description": "a js server with express",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test",
+    "test": " node -r dotenv/config src/index.js dotenv_config_path=../client/.env" ,
     "start": " node -r dotenv/config src/index.js dotenv_config_path=../client/.env"
   },
   "author": "David Liebman",

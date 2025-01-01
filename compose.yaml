@@ -5,12 +5,16 @@ services:
             - "5173:5173"
         networks: 
             - mynetwork 
+        environment:
+            - VITE_HOST=localhost
     server:
         build: express/.
         ports:
             - "8008:8008"
         networks: 
             - mynetwork
+        environment:
+            - HOST=0.0.0.0
         volumes:
             - /home:/home
 
