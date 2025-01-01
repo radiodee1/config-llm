@@ -4,8 +4,11 @@ var cors = require('cors')
 
 const fs = require('fs');
 const app = express();
+require('dotenv').config()
+console.log(process.env) // remove this after you've confirmed it is working
+
 const port = 8008;
-const host = "127.0.0.1";
+const host = process.env.HOST;
 
 const multer = require('multer');
 const storage = multer.memoryStorage()
