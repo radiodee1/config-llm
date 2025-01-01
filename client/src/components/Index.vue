@@ -117,7 +117,7 @@ export default {
                     method: "GET",
                     headers: {
                         "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
                         "Access-Control-Allow-Headers": "X-Requested-With",
                         "Content-Type": "text/plain"
                     }
@@ -166,7 +166,7 @@ export default {
                     body: bodyObj,
                     headers: {
                         "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
                         "Access-Control-Allow-Headers": "X-Requested-With",
                         "Content-Type": "application/json"
                     }
@@ -201,7 +201,7 @@ export default {
                     body: bodyObj,
                     headers: {
                         "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
                         "Access-Control-Allow-Headers": "X-Requested-With",
                         "Content-Type": "application/json"
                     }
