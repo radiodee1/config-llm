@@ -1,6 +1,6 @@
 <script >
 
-const host = "127.0.0.1"
+const host =  import.meta.env.VITE_HOST;
 
 export default {
     props: {
@@ -31,7 +31,7 @@ export default {
                     body: bodyObj,
                     headers: {
                         "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
                         "Access-Control-Allow-Headers": "X-Requested-With",
                         "Content-Type": "application/json"
                     }
@@ -68,7 +68,7 @@ export default {
                     body: bodyObj,
                     headers: {
                         "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT",
+                        "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST",
                         "Access-Control-Allow-Headers": "X-Requested-With",
                         "Content-Type": "application/json"
                     }

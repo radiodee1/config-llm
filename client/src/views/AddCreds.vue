@@ -1,6 +1,6 @@
 <script >
 
-const host = "127.0.0.1"
+const host =  import.meta.env.VITE_HOST;
 
 export default {
     props: {
