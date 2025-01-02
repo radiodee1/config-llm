@@ -8,8 +8,12 @@ services:
         environment:
             - VITE_HOST=server
         container_name: "client"
-        links:
-            - "server:express"
+        
+            #volumes:
+            #- client-app:/app 
+
+           #links:
+            #- "server:express"
             #extra_hosts:
             #- "host.docker.internal:host-gateway"
     server:
@@ -26,6 +30,13 @@ services:
         container_name: "server"
         volumes:
             - /home:/home
+
+            #    nginx:
+            #build: nginx/.
+            #ports:
+            #- "80:80"
+            #depends_on: 
+            #- client
 
 volumes:
     home:

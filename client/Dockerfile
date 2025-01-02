@@ -1,20 +1,26 @@
-FROM node:23-alpine3.20 
-#FROM ubuntu:24.04 AS builder
-
-#RUN apt-get update && apt-get install -y locales  \
-#	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-#ENV LANG=en_US.utf8
-
-#RUN apt-get upgrade -y 
-
-#RUN apt-get install -y npm nodejs
+FROM node:23-alpine3.20 as builder 
 
 WORKDIR /app
 COPY package.json package-lock.json ./
+
+RUN npm install -g npm@latest
 RUN npm install
 COPY . .
 RUN npm run build
 EXPOSE 5173
 
+#RUN npm run dev 
+
+FROM nginx:1.27.3-alpine
+
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY ./nginx/index.html /usr/share/nginx/html/index.html
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
 #CMD ["/bin/sh", "-i"]
-CMD ["npm", "run", "dev"]
+#CMD ["npm", "run", "dev"]
+
+#STOPSIGNAL SIGTERM
+#CMD ["nginx", "-g", "daemon off;"]
