@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
     client:
         build: client/.
@@ -6,7 +8,7 @@ services:
         networks: 
             - backend 
         environment:
-            - VITE_HOST=backend 
+            - VITE_HOST=localhost 
         container_name: "client"
         depends_on:
             - server
@@ -16,28 +18,29 @@ services:
         build: express/.
         #ports:
             #- "8008:8008"
-            #- "8001:8001"
+            #- "8008:8001"
         networks: 
             - backend 
         extra_hosts:
             - "host.docker.internal:host-gateway"
         environment:
             - PORT=8001
-            - HOST=localhost
-            - HOST_IP=host.docker.internal
+            - HOST=server
+            #- HOST_IP=host.docker.internal
         container_name: "server"
         volumes:
             - /home:/home
     nginx:
         build: nginx/.
         ports:
-            - "8001:8001"
+            #- "8001:8001"
             - "80:80"
             - "8008:8008"
         networks:
             - backend
         container_name: "nginx"
-
+        depends_on:
+            - server
 
 
 

@@ -346,7 +346,7 @@ app.put('/credential' , upload.any() , (req, res) => {
 
 
 
-app.listen(port,  () => {
+app.listen(port, host,  () => {
     console.log(`Example app listening at http://${host}:${port}`);
     //console.log(readDirForList('/home/dave'));
 });
