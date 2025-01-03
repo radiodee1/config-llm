@@ -6,16 +6,9 @@ services:
         networks: 
             - backend 
         environment:
-            - VITE_HOST=server
+            - VITE_HOST=server 
         container_name: "client"
         
-            #volumes:
-            #- client-app:/app 
-
-           #links:
-            #- "server:express"
-            #extra_hosts:
-            #- "host.docker.internal:host-gateway"
     server:
         build: express/.
         ports:
@@ -30,13 +23,6 @@ services:
         container_name: "server"
         volumes:
             - /home:/home
-
-            #    nginx:
-            #build: nginx/.
-            #ports:
-            #- "80:80"
-            #depends_on: 
-            #- client
 
 volumes:
     home:

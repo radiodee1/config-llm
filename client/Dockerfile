@@ -1,5 +1,7 @@
 FROM node:23-alpine3.20 as builder 
 
+#ENV VITE_HOST=host.docker.internal
+
 WORKDIR /app
 COPY package.json package-lock.json ./
 
@@ -14,8 +16,6 @@ EXPOSE 5173
 FROM nginx:1.27.3-alpine
 
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
-
-COPY ./nginx/index.html /usr/share/nginx/html/index.html
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
