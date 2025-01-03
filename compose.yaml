@@ -6,17 +6,18 @@ services:
         networks: 
             - backend 
         environment:
-            - VITE_HOST=server 
+            - VITE_HOST="server" 
         container_name: "client"
-        
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
     server:
         build: express/.
         ports:
             - "8008:8008"
         networks: 
             - backend 
-            #extra_hosts:
-            #- "host.docker.internal:host-gateway"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         environment:
             - HOST=localhost
             - HOST_IP=host.docker.internal
