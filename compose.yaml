@@ -22,7 +22,7 @@ services:
         extra_hosts:
             - "host.docker.internal:host-gateway"
         environment:
-            - PORT=8008
+            - PORT=8001
             - HOST=localhost
             - HOST_IP=host.docker.internal
         container_name: "server"
