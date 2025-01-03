@@ -6,7 +6,7 @@ const fs = require('fs');
 const app = express();
 require('dotenv').config()
 
-const port = 8008;
+const port = process.env.PORT || 8008;
 const host = process.env.HOST;
 
 const multer = require('multer');

@@ -14,14 +14,14 @@ EXPOSE 5173
 EXPOSE 8008
 #RUN npm run dev 
 
-FROM nginx:1.27.3-alpine
+#FROM nginx:1.27.3-alpine
 
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+#COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+#COPY --from=builder /app/dist /usr/share/nginx/html
 
 #CMD ["/bin/sh", "-i"]
-#CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev"]
 
 #STOPSIGNAL SIGTERM
 #CMD ["nginx", "-g", "daemon off;"]
