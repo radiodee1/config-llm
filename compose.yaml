@@ -16,9 +16,6 @@ services:
             - "host.docker.internal:host-gateway"
     server:
         build: express/.
-        #ports:
-            #- "8008:8008"
-            #- "8008:8001"
         networks: 
             - backend 
         extra_hosts:
@@ -26,14 +23,12 @@ services:
         environment:
             - PORT=8001
             - HOST=server
-            #- HOST_IP=host.docker.internal
         container_name: "server"
         volumes:
             - /home:/home
     nginx:
         build: nginx/.
         ports:
-            #- "8001:8001"
             - "80:80"
             - "8008:8008"
         networks:
