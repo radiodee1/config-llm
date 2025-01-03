@@ -6,7 +6,7 @@ services:
         networks: 
             - backend 
         environment:
-            - VITE_HOST="server" 
+            - VITE_HOST=host.docker.internal 
         container_name: "client"
         extra_hosts:
             - "host.docker.internal:host-gateway"
