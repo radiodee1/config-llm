@@ -11,6 +11,7 @@ COPY . .
 RUN npm run build
 EXPOSE 5173
 
+EXPOSE 8008
 #RUN npm run dev 
 
 FROM nginx:1.27.3-alpine
