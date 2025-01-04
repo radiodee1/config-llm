@@ -8,7 +8,7 @@ services:
         networks: 
             - backend 
         environment:
-            - VITE_HOST=172.17.0.1
+            VITE_HOST: server
         container_name: "client"
         depends_on:
             - server

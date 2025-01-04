@@ -42,4 +42,7 @@ curl -X PUT http://localhost:8008/home/dave/.llm.env -k -d something
 curl -X PUT http://localhost:8008/config --data '{"body":"here...", "path":"/home/dave/test.txt"}' -H "Content-Type: Application/json"
 
 chromium --ignore-certificate-errors --disable-web-security --user-data-dir=./dummy_data
+
+docker logs -f nginx 1>/dev/null
+
 ```
