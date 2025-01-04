@@ -1,6 +1,6 @@
 <script >
 
-const host =  import.meta.env.VITE_HOST;
+const host =  import.meta.env.VITE_REMOTE;
 
 export default {
     props: {

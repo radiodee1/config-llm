@@ -13,7 +13,7 @@ import { toast } from 'vue3-toastify';
 
 //dotenv.config()
 
-const host =  import.meta.env.VITE_HOST;
+const host =  import.meta.env.VITE_REMOTE;
 
 console.log(host);
 
