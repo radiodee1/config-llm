@@ -7,8 +7,6 @@ services:
             - "5173:5173"
         networks: 
             - backend 
-        environment:
-            VITE_REMOTE: server
         env_file: "./env/client.env"
         container_name: "client"
         depends_on:
@@ -21,9 +19,6 @@ services:
             - backend 
         extra_hosts:
             - "host.docker.internal:host-gateway"
-        environment:
-            - PORT=8001
-            - HOST=server # not used
         env_file: "./env/server.env"
         container_name: "server"
         volumes:
