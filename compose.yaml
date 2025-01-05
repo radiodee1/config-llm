@@ -9,6 +9,7 @@ services:
             - backend 
         environment:
             VITE_REMOTE: server
+        env_file: "./env/client.env"
         container_name: "client"
         depends_on:
             - server
@@ -23,6 +24,7 @@ services:
         environment:
             - PORT=8001
             - HOST=server # not used
+        env_file: "./env/server.env"
         container_name: "server"
         volumes:
             - /home:/home
