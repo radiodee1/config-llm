@@ -345,8 +345,8 @@ app.put('/credential' , upload.any() , (req, res) => {
 })
 
 
-
-app.listen(port, host,  () => {
+// NOTE: do not include 'host' in listen function below for app to work on localhost
+app.listen(port,  () => {
     console.log(`Example app listening at http://${host}:${port}`);
     //console.log(readDirForList('/home/dave'));
 });
