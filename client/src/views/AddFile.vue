@@ -1,6 +1,7 @@
 <script >
 
-const host =  import.meta.env.VITE_REMOTE;
+const host =  import.meta.env.VITE_REMOTE || "localhost";
+const port =  import.meta.env.VITE_REMOTE_PORT || 8008;
 
 export default {
     props: {
@@ -31,7 +32,7 @@ export default {
           if (!this.file) return;
           //let text = this.file.replace(/\n/g, '\\n');
   
-          const url = `http://${host}:8008/file`;
+          const url = `http://${host}:${port}/file`;
           
           //formData.append('file', this.file);
           //formData.append("filename", "/home/" + this.userdir + "/.llm." + this.var + ".json");
