@@ -10,7 +10,7 @@ export default {
         var: String,
         item: String,
         envFile: String,
-        userdir: String
+        userdir: String 
     },
     data() {
         return {
@@ -18,7 +18,8 @@ export default {
             listbackup: ['backup1', 'backup2', 'backup3'],
             backupName: "",
             recentBackup: "",
-            prospectiveBackup: "llm.backup.xxx.txt" 
+            prospectiveBackup: "llm.backup.xxx.txt" ,
+            latestRestore: "none"
         }
     },
     methods: {
@@ -87,7 +88,7 @@ export default {
                 console.error(error.message);
             }
             this.$forceUpdate();
-
+            this.latestRestore = this.backupName;
             console.log('restore');
             console.log(this.envFile);
             console.log(this.userdir);
@@ -160,6 +161,7 @@ export default {
 
             <div  >
                 Select backup from drop down :  <br>
+                Latest restored file : {{ latestRestore }} <br>
                 <select name="backup" id="backup" v-model="backupName">
                   <option v-for="option in listbackup" :key="option" :value="option">
                     {{ option }}
