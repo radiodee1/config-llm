@@ -117,7 +117,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post('/config', (req, res) => {
+app.post('/api/config', (req, res) => {
     const filepath = req.body.path;
     console.log(filepath, req.body)
     if (! filepath.startsWith("/home/")) {
@@ -135,7 +135,7 @@ app.post('/config', (req, res) => {
     //res.send('Hello World!');
 });
 
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
     const dirname = '/home/';
     var filelist = "";
     fs.readdir(dirname, (err, files) => {
@@ -150,7 +150,7 @@ app.get('/users', (req, res) => {
     })
 })
 
-app.put('/config',  function (req, res)  {
+app.put('/api/config',  function (req, res)  {
     //const filename =   '/home/dave/test.txt';
     const fname = req.body.path;
     
@@ -169,7 +169,7 @@ app.put('/config',  function (req, res)  {
     });
 })
 
-app.post('/restart', (req, res) => {
+app.post('/api/restart', (req, res) => {
     const filepath = req.body.path;
     console.log(filepath, req.body)
     if (! filepath.startsWith("/home/")) {
@@ -195,7 +195,7 @@ app.post('/restart', (req, res) => {
 // restore
 // listbackup
 
-app.post('/backup', (req, res) => {
+app.post('/api/backup', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
     //console.log(filepath, req.body)
@@ -232,7 +232,7 @@ app.post('/backup', (req, res) => {
     });  
 });
 
-app.post('/restore', (req, res) => {
+app.post('/api/restore', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
     //console.log(filepath, req.body)
@@ -266,7 +266,7 @@ app.post('/restore', (req, res) => {
 });
 
 
-app.post('/listbackup', (req, res) => {
+app.post('/api/listbackup', (req, res) => {
     //const dirname = req.body.path;
     const filepath = req.body.path;
     //console.log(filepath, req.body)
@@ -305,7 +305,7 @@ app.post('/listbackup', (req, res) => {
 // copy file 
 // copy json credential file
 
-app.put('/file',  upload.any(), function (req, res)  {
+app.put('/api/file',  upload.any(), function (req, res)  {
     
     const newPath = req.body.destination;
     console.log(newPath, 'newPath');
@@ -324,7 +324,7 @@ app.put('/file',  upload.any(), function (req, res)  {
     });
  });
 
-app.put('/credential' , upload.any() , (req, res) => {
+app.put('/api/credential' , upload.any() , (req, res) => {
     
     const newPath = req.body.destination;
     console.log(newPath, 'newPath');

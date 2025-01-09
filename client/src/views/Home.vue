@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         backup: async function () {
-            const url = `http://${host}:${port}/backup`;
+            const url = `http://${host}:${port}/api/backup`;
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/.llm.env\"}";
             
             console.log(bodyObj)
@@ -61,7 +61,7 @@ export default {
             if (backupNameArray.length > 1) {
                 this.backupName = backupNameArray[ backupNameArray.length - 1 ];
             }
-            const url = `http://${host}:${port}/restore`;
+            const url = `http://${host}:${port}/api/restore`;
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.backupName + "\"}";
             
             console.log(bodyObj)
@@ -97,7 +97,7 @@ export default {
             if (this.backupName.trim().length == 0) {
                 this.backupName = '/home/' + this.userdir ; //+ "/.llm.env";
             }
-            const url = `http://${host}:${port}/listbackup`;
+            const url = `http://${host}:${port}/api/listbackup`;
             const bodyObj =  "{\"path\": \""  + this.backupName + "\"}";
             
             console.log(bodyObj)

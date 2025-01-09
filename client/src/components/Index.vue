@@ -112,7 +112,7 @@ export default {
             toast.error("No Backend: No data will be read or saved.");
         },
         readUserlist: async function() {
-            const url = `http://${host}:${port}/users`;
+            const url = `http://${host}:${port}/api/users`;
             try {
                 const response = await fetch(url , {
                     method: "GET",
@@ -156,7 +156,7 @@ export default {
         //////////////////
         writeRestartFile: async function() {
             const filename = ".llm.restart";
-            const url = `http://${host}:${port}/restart`;
+            const url = `http://${host}:${port}/api/restart`;
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + filename + "\"}";
             
             console.log(bodyObj)
@@ -191,7 +191,7 @@ export default {
                 this.showToast();
                 return;
             }
-            const url = `http://${host}:${port}/config`;
+            const url = `http://${host}:${port}/api/config`;
             const bodyObj =  "{\"path\": \"/home/" + this.userdir + "/" + this.filename + "\"}";
             
             console.log(bodyObj)
@@ -233,7 +233,7 @@ export default {
             }
             
             let text = this.textfile.replace(/\n/g, '\\n');
-            const url = `http://${host}:${port}/config`;
+            const url = `http://${host}:${port}/api/config`;
             let bodyObj = {
                 "path": "/home/" + this.userdir + "/" + this.filename,
                  "body": text 
