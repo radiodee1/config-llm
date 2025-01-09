@@ -6,7 +6,7 @@ services:
         ports:
             #- "5173:5173"
             - "80:80"
-            - "8008:8008"
+            #- "8008:8008"
 
         networks: 
             - backend 

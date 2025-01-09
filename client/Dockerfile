@@ -9,9 +9,7 @@ RUN npm install -g npm@latest
 RUN npm install
 COPY . .
 RUN npm run build
-EXPOSE 5173
 
-EXPOSE 8008
 EXPOSE 80 
 EXPOSE 5173 
 #RUN npm run dev 
