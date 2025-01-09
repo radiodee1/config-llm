@@ -4,6 +4,14 @@ LOCAL_IP=$(hostname -I | awk '{ print $1 }')
 LOCAL_PORT=8001
 
 #LOCAL_IP=server
+#!/bin/bash
+
+if [ $# -ne '1' ]; then
+    echo ""
+    echo "Enter a LOCAL_IP or leave blank for this host."
+else
+    LOCAL_IP=$1 
+fi 
 
 echo $LOCAL_IP
 echo $LOCAL_PORT
