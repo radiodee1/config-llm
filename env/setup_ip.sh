@@ -9,6 +9,7 @@ LOCAL_PORT=8001
 if [ $# -ne '1' ]; then
     echo ""
     echo "Enter a LOCAL_IP or leave blank for this host."
+    echo "Enter empty double quotation marks for 'none'."
 else
     LOCAL_IP=$1 
 fi 
