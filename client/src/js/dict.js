@@ -4,7 +4,8 @@ const dict = {
         'OPENAI_MODEL',
         'OPENAI_MODEL_FINETUNE',
         'OPENAI_API_KEY',
-        'OPENAI_ORGANIZATION'
+        'OPENAI_ORGANIZATION',
+        'PROJECT_REVIEW_NAME'
     ],
     config : [
         'PROJECT_LAUNCH_ARGS'
