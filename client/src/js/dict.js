@@ -5,7 +5,9 @@ const dict = {
         'OPENAI_MODEL_FINETUNE',
         'OPENAI_API_KEY',
         'OPENAI_ORGANIZATION',
-        'PROJECT_REVIEW_NAME'
+        'PROJECT_REVIEW_NAME',
+        'OPENAI_EMBEDDING_URL',
+        'OPENAI_EMBEDDING_NAME'
     ],
     config : [
         'PROJECT_LAUNCH_ARGS'
