@@ -102,7 +102,7 @@ const dict = {
                 name: '--review',
                 selected: false,
                 grouped: false,
-                help: "Use review memory."
+                help: "Use review * function."
             }
 
         ],
