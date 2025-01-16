@@ -97,6 +97,12 @@ const dict = {
                 selected: false,
                 grouped: true,
                 help: "Use json for model prompt."
+            },
+            {
+                name: '--review',
+                selected: false,
+                grouped: false,
+                help: "Use review memory."
             }
 
         ],
