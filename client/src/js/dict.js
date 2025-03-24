@@ -186,7 +186,18 @@ const dict = {
                 type: Number,
                 help: "Number of memory units used in input."
 
+            },            
+            {
+                name: '--wake_words',
+                selected: false,
+                grouped: false,
+                def: "35",
+                actual: "",
+                type: 'plus_args',
+                help: "List of wake words used in input."
+
             }
+
 
 
         ]
