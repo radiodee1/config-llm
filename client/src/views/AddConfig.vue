@@ -1,5 +1,7 @@
 <script >
 
+import dict from '../js/dict.js';
+
 export default {
     props: {
         var: String,
@@ -43,8 +45,11 @@ export default {
             this.oldItemArray = [];
             for (let i in arr) {
                 const x = arr[i].trim();
-                if (x == "") {
+                if (x == "" || x == "'" || x == '"') {
                     continue;
+                }
+                if (x == "#") {
+                    break;
                 }
                 this.oldItemArray.push(x)
             }
@@ -53,29 +58,67 @@ export default {
             this.consumeDone = false;
             this.oldItemPosition = 0;
             let num = 0;
+            let addx = 0;
             const endloop = this.oldItemArray.length + 1;
             while (!this.consumeDone && this.oldItemPosition < this.oldItemArray.length &&
                     num < endloop ) {
-
-                this.consumeArgs();
-                this.consumeFlags();
-                num += 1;
+                num = 0;
+                addx += this.consumeArgs();
+                addx += this.consumeFlags();
+                num += addx;
+                console.log(num + " " + endloop);
 
             }
             
         },
         consumeArgs: function () {
+            let num = 1;
             this.token = this.oldItemArray[this.oldItemPosition];
             if ( this.nameListArgs.includes(this.token) ) {
                 const key = this.token;
-                this.advance();
-                if (this.consumeDone) {
-                    return;
+                let v = "";
+                let val = "";
+                let m = "";
+                for (let i in dict.options.args) {
+                    let x  = dict.options.args[i];
+                    if (x.name == key ) {
+                        m = x.type;
+                        console.log('x/m' + ' ' + x.name  + ' : ' + m);
+                        break;
+                    }
                 }
-                const val = this.oldItemArray[this.oldItemPosition];
-                this.saveArgs(key, val);
                 this.advance();
+                if ( m == "plus_args") {
+                    //this.advance();
+                    val = this.oldItemArray[this.oldItemPosition];
+                    //console.log(">>" + val);
+                    while (! val.startsWith("--")) {
+                        //this.advance()
+                        val = this.oldItemArray[this.oldItemPosition];
+                        //v = v + " " + val;
+                        //this.advance();
+                        num += 1;
+                        if (this.consumeDone || val.startsWith("--")) {
+                            break;
+                        }
+                        v = v + ' ' + val;
+                        this.advance();
+
+                    } 
+                    console.log("k/v", key, v.trim());
+                    this.saveArgs(key, v.trim());
+
+                }
+                else if (m != "plus_args") {
+                    val = this.oldItemArray[this.oldItemPosition];
+                    this.saveArgs(key, val);
+                    this.advance();
+                    num = 1;
+
+                }
+            ///    
             }
+            return num;
         },
         consumeFlags: function () {
             this.token = this.oldItemArray[this.oldItemPosition];
@@ -84,6 +127,7 @@ export default {
                 this.saveFlags(key);
                 this.advance();
             }
+            return 1;
 
         },
         advance: function () {
