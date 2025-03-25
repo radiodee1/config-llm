@@ -102,7 +102,7 @@ const dict = {
                 name: '--review',
                 selected: false,
                 grouped: false,
-                help: "Use review * function."
+                help: "Use review function."
             }
 
         ],
@@ -191,10 +191,20 @@ const dict = {
                 name: '--wake_words',
                 selected: false,
                 grouped: false,
-                def: "35",
+                def: "wake hello",
                 actual: "",
                 type: 'plus_args',
                 help: "List of wake words used in input."
+
+            },
+            {
+                name: '--test_review',
+                selected: false,
+                grouped: false,
+                def: "-1",
+                actual: "",
+                type: Number,
+                help: "Index to use for review test."
 
             }
 
