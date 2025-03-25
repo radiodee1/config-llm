@@ -51,7 +51,8 @@ export default {
                 if (x == "#") {
                     break;
                 }
-                this.oldItemArray.push(x)
+                this.oldItemArray.push(x);
+                console.log(this.oldItemArray);
             }
         },
         parseOldString: function () {
@@ -66,13 +67,12 @@ export default {
                 addx += this.consumeArgs();
                 addx += this.consumeFlags();
                 num += addx;
-                console.log(num + " " + endloop);
 
             }
-            
+            //console.log('flags', this.nameListFlags);
         },
         consumeArgs: function () {
-            let num = 1;
+            let num = 0;
             this.token = this.oldItemArray[this.oldItemPosition];
             if ( this.nameListArgs.includes(this.token) ) {
                 const key = this.token;
@@ -83,20 +83,14 @@ export default {
                     let x  = dict.options.args[i];
                     if (x.name == key ) {
                         m = x.type;
-                        console.log('x/m' + ' ' + x.name  + ' : ' + m);
                         break;
                     }
                 }
                 this.advance();
                 if ( m == "plus_args") {
-                    //this.advance();
                     val = this.oldItemArray[this.oldItemPosition];
-                    //console.log(">>" + val);
                     while (! val.startsWith("--")) {
-                        //this.advance()
                         val = this.oldItemArray[this.oldItemPosition];
-                        //v = v + " " + val;
-                        //this.advance();
                         num += 1;
                         if (this.consumeDone || val.startsWith("--")) {
                             break;
@@ -105,7 +99,6 @@ export default {
                         this.advance();
 
                     } 
-                    console.log("k/v", key, v.trim());
                     this.saveArgs(key, v.trim());
 
                 }
@@ -126,6 +119,7 @@ export default {
                 const key = this.token;
                 this.saveFlags(key);
                 this.advance();
+                //console.log('key', key);
             }
             return 1;
 
