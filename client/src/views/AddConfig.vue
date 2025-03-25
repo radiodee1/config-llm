@@ -337,6 +337,10 @@ td {
     vertical-align: top;
 }
 .selected {
+    width: 100%;
     border: 6px solid blue;
+}
+button {
+    width: 100%;
 }
 </style>
