@@ -206,6 +206,16 @@ const dict = {
                 type: Number,
                 help: "Index to use for review test."
 
+            },
+            {
+                name: '--size',
+                selected: false,
+                grouped: false,
+                def: "2048",
+                actual: "",
+                type: Number,
+                help: "Number of TOKENS to use from context-area."
+
             }
 
 
