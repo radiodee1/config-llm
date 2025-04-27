@@ -13,6 +13,7 @@ This project uses docker and two docker images. One image is the client, which h
 The pi-llm project uses a wifi connenction on the raspberry pi to access AI Api's from the web.
 
 
+
 ## Command Line Notes:
 
 Below are some command notes for instructions I sometimes forget or don't use often.
