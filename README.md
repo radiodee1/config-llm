@@ -16,6 +16,10 @@ The pi-llm project uses a wifi connenction on the raspberry pi to access AI Api'
 
 ![Screenshot 1](screenshots/home.png)
 
+![Screenshot 2](screenshots/home-config.png)
+
+![Screenshot 3](screenshots/home-edit.png)
+
 ## Command Line Notes:
 
 Below are some command notes for instructions I sometimes forget or don't use often.
