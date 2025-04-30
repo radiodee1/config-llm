@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+cd ../env 
+
 LOCAL_IP=$(hostname -I | awk '{ print $1 }')
 LOCAL_PORT=8001
 
