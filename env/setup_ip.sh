@@ -2,6 +2,9 @@
 
 cd ../env 
 
+HOST_CLIENT='client.env'
+HOST_SERVER='server.env'
+
 LOCAL_IP=$(hostname -I | awk '{ print $1 }')
 LOCAL_PORT=8001
 
@@ -19,8 +22,15 @@ fi
 echo $LOCAL_IP
 echo $LOCAL_PORT
 
-echo "# env" > client.env
-echo "VITE_REMOTE_PORT=${LOCAL_PORT}" >> client.env
-echo "VITE_REMOTE=${LOCAL_IP}" >> client.env
+echo "# env" > $HOST_CLIENT
+echo "VITE_REMOTE_PORT=${LOCAL_PORT}" >> $HOST_CLIENT
+echo "VITE_REMOTE=${LOCAL_IP}" >> $HOST_CLIENT
 
-cp client.env ../client/.env
+echo "# env" > $HOST_SERVER
+echo "PORT=8001" >> $HOST_SERVER
+echo "HOST=localhost" >> $HOST_SERVER
+
+echo $HOST_SERVER
+echo $HOST_CLIENT
+
+#cp client.env ../client/.env
