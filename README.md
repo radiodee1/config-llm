@@ -22,7 +22,7 @@ This is the central page where you choose what element of the config file you wa
 
 ![Screenshot 2](screenshots/home-config.png)
 
-This is an example of one of the more complex editing pages. Here you can change the contents of the 'ARGS' element of the config file.
+This is an example of one of the more complex editing pages. Here you can change the contents of the 'PROJECT_LAUNCH_ARGS' element of the config file.
 
 ![Screenshot 3](screenshots/home-edit.png)
 
