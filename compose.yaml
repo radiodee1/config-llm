@@ -3,26 +3,15 @@ services:
     client:
         build: client/.
         ports:
-            #- "5173:5173"
             - "80:80"
-            #- "8008:8008"
-
-        networks: 
-            - backend 
         env_file: "./env/client.env"
         container_name: "client"
         depends_on:
             - server
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
     server:
         build: express/.
         ports:
             - "8001:8001"
-        networks: 
-            - backend 
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
         env_file: "./env/server.env"
         container_name: "server"
         volumes:
@@ -32,5 +21,5 @@ volumes:
     home:
     #env:
 
-networks:
-    backend:
+#networks:
+#    backend:
