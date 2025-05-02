@@ -33,4 +33,4 @@ echo "HOST=localhost" >> $HOST_SERVER
 echo $HOST_SERVER
 echo $HOST_CLIENT
 
-#cp client.env ../client/.env
+cp $HOST_CLIENT ../client/.env
