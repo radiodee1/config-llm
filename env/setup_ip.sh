@@ -8,8 +8,6 @@ HOST_SERVER='server.env'
 LOCAL_IP=$(hostname -I | awk '{ print $1 }')
 LOCAL_PORT=8001
 
-#LOCAL_IP=server
-#!/bin/bash
 
 if [ $# -ne '1' ]; then
     echo ""

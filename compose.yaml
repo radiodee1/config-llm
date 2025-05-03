@@ -19,7 +19,4 @@ services:
 
 volumes:
     home:
-    #env:
 
-#networks:
-#    backend:
