@@ -19,5 +19,5 @@ fi
 echo "# env" > $HOST_FILE
 echo "VITE_USER_DIR=${USER_DIR}" >> $HOST_FILE
 echo "USER_DIR=${USER_DIR}" >> $HOST_FILE
-
+echo "# empty will be replaced later!!" >> $HOST_FILE
 
