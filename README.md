@@ -58,19 +58,19 @@ docker logs -f nginx 1>/dev/null
 More notes:
 
 ```
-            version: '3.8'
-            services:
-              your_service:
-                image: your_image
-                volumes:
-                  - /tmp/.X11-unix:/tmp/.X11-unix
-                  - /dev/shm:/dev/shm
-                  - /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse
-                  - ~/.config/pulse:/root/.config/pulse
-                environment:
-                  - PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native
-                  - DISPLAY=${DISPLAY:-:0}
-                # Add --privileged if necessary for newer Docker versions
+version: '3.8'
+services:
+  your_service:
+    image: your_image
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/shm:/dev/shm
+      - /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse
+      - ~/.config/pulse:/root/.config/pulse
+    environment:
+      - PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native
+      - DISPLAY=${DISPLAY:-:0}
+    # Add --privileged if necessary for newer Docker versions
 ```
 Even more notes:
 ```
