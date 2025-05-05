@@ -56,6 +56,8 @@ docker logs -f nginx 1>/dev/null
 
 ```
 More notes:
+- Must install PulseAudio on windows.
+- Container uses PulseAudio.
 
 ```
 version: '3.8'
@@ -73,6 +75,9 @@ services:
     # Add --privileged if necessary for newer Docker versions
 ```
 Even more notes:
+- Install PulseAudio on linux.
+- Container uses PulseAudio.
+
 ```
 version: '3.7'
 services:
