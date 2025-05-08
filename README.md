@@ -76,7 +76,7 @@ services:
 ```
 Even more notes:
 - Install PulseAudio on linux.
-- Container uses PulseAudio.
+- Host uses PulseAudio. PlugAudio seems to work too.
 
 ```
 version: '3.7'
