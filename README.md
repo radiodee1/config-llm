@@ -55,42 +55,4 @@ docker run -p 8008:8008 --mount type=bind,source=/home,destination=/home server-
 docker logs -f nginx 1>/dev/null
 
 ```
-More notes:
-- Must install PulseAudio on windows.
-- Container uses PulseAudio.
 
-```
-version: '3.8'
-services:
-  your_service:
-    image: your_image
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - /dev/shm:/dev/shm
-      - /run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse
-      - ~/.config/pulse:/root/.config/pulse
-    environment:
-      - PULSE_SERVER=unix:/run/user/$(id -u)/pulse/native
-      - DISPLAY=${DISPLAY:-:0}
-    # Add --privileged if necessary for newer Docker versions
-```
-Even more notes:
-- Install PulseAudio on linux.
-- Host uses PulseAudio. PlugAudio seems to work too.
-
-```
-version: '3.7'
-services:
-  my_audio_app:
-    image: your_audio_app_image
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - /run/user/$UID/pulse:/run/user/$UID/pulse
-      - ~/.config/pulse:/home/user/.config/pulse # Optional, for persistent PulseAudio configuration
-    environment:
-      - PULSE_SERVER=unix:/run/user/$UID/pulse/native
-      - XDG_RUNTIME_DIR=/run/user/$UID
-    devices:
-      - /dev/snd:/dev/snd
-    privileged: true # May be needed for some setups
-```
