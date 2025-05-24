@@ -103,7 +103,14 @@ const dict = {
                 selected: false,
                 grouped: false,
                 help: "Use review function."
+            },
+            {
+                name: '--google_gemini',
+                selected: false,
+                grouped: false,
+                help: "Use Google Gemini model."
             }
+
 
         ],
         args: [
