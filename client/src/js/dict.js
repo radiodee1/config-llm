@@ -7,7 +7,10 @@ const dict = {
         'OPENAI_ORGANIZATION',
         'PROJECT_REVIEW_NAME',
         'OPENAI_EMBEDDING_URL',
-        'OPENAI_EMBEDDING_NAME'
+        'OPENAI_EMBEDDING_NAME',
+        'GOOGLE_GEMINI_URL',
+        'GOOGLE_GEMINI_MODEL',
+        'GOOGLE_GEMINI_API_KEY'
     ],
     config : [
         'PROJECT_LAUNCH_ARGS'
