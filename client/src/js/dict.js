@@ -112,7 +112,14 @@ const dict = {
                 selected: false,
                 grouped: false,
                 help: "Use Google Gemini model."
+            },
+            {
+                name: '--sleep_wake',
+                selected: false,
+                grouped: false,
+                help: "Enable sleep/wake type operation for --cloud_stt."
             }
+
 
 
         ],
