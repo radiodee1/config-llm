@@ -120,7 +120,7 @@ app.use(express.json());
 app.post('/api/config', (req, res) => {
     const filepath = req.body.path;
     console.log(filepath, req.body)
-    if (! filepath.startsWith("/home/")) {
+    if (! fs.existsSync(filepath) ) {
         res.send('');
         return;
     }
@@ -172,7 +172,7 @@ app.put('/api/config',  function (req, res)  {
 app.post('/api/restart', (req, res) => {
     const filepath = req.body.path;
     console.log(filepath, req.body)
-    if (! filepath.startsWith("/home/")) {
+    if (! fs.existsSync(filepath) ) {
         res.send('');
         return;
     }
@@ -199,7 +199,7 @@ app.post('/api/backup', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
     //console.log(filepath, req.body)
-    if (! filepath.startsWith("/home/") ) {
+    if (! fs.existsSync(filepath)  ) {
         res.send('');
         return;
     }
@@ -236,7 +236,7 @@ app.post('/api/restore', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
     //console.log(filepath, req.body)
-    if (! filepath.startsWith("/home/") ) {
+    if (! fs.existsSync(filepath)  ) {
         res.send('');
         return;
     }
@@ -270,7 +270,7 @@ app.post('/api/listbackup', (req, res) => {
     //const dirname = req.body.path;
     const filepath = req.body.path;
     //console.log(filepath, req.body)
-    if (! filepath.startsWith("/home/") ) {
+    if (! fs.existsSync(filepath)   ) {
         res.send('');
         return;
     }
