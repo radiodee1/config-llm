@@ -113,6 +113,12 @@ function readDirForList(dirname) {
 }
 /////////////////////////
 
+function directoryPortion(filepath, filename) {
+    const x = filename.length;
+    const y = filepath.slice(0, filepath.length - x);
+    return y;
+}
+
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -171,8 +177,9 @@ app.put('/api/config',  function (req, res)  {
 
 app.post('/api/restart', (req, res) => {
     const filepath = req.body.path;
+    const path = directoryPortion(filepath, '.llm.restart')
     console.log(filepath, req.body)
-    if (! fs.existsSync(filepath) ) {
+    if (! fs.existsSync(path) ) {
         res.send('');
         return;
     }
@@ -198,8 +205,9 @@ app.post('/api/restart', (req, res) => {
 app.post('/api/backup', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
-    //console.log(filepath, req.body)
-    if (! fs.existsSync(filepath)  ) {
+    const path = directoryPortion(filepath, 'llm.backup.xxx.txt');
+    console.log(path, req.body)
+    if (! fs.existsSync(path)  ) {
         res.send('');
         return;
     }
@@ -235,8 +243,9 @@ app.post('/api/backup', (req, res) => {
 app.post('/api/restore', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
-    //console.log(filepath, req.body)
-    if (! fs.existsSync(filepath)  ) {
+    const path = directoryPortion(filepath, 'llm.backup.xxx.txt');
+    console.log(path, req.body)
+    if (! fs.existsSync(path)  ) {
         res.send('');
         return;
     }
@@ -348,5 +357,5 @@ app.put('/api/credential' , upload.any() , (req, res) => {
 // NOTE: do not include 'host' in listen function below for app to work on localhost
 app.listen(port,  () => {
     console.log(`Example app listening at http://${host}:${port}`);
-    //console.log(readDirForList('/home/dave'));
+    //console.log(directoryPortion('/home/dave/test.txt','test.txt'));
 });
