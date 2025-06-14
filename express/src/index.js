@@ -123,6 +123,9 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+// Here we read the .env file. The file
+// is named '.llm.env'
 app.post('/api/config', (req, res) => {
     const filepath = req.body.path;
     console.log(filepath, req.body)
@@ -141,6 +144,8 @@ app.post('/api/config', (req, res) => {
     //res.send('Hello World!');
 });
 
+// Here we read the home directory to find the 
+// current user. We use the readdir method
 app.get('/api/users', (req, res) => {
     const dirname = '/home/';
     var filelist = "";
@@ -156,6 +161,9 @@ app.get('/api/users', (req, res) => {
     })
 })
 
+// Here we replace the contents of the config file
+// on the host hard drive. The full path for the 
+// file is included in the put request.
 app.put('/api/config',  function (req, res)  {
     //const filename =   '/home/dave/test.txt';
     const fname = req.body.path;
@@ -175,6 +183,9 @@ app.put('/api/config',  function (req, res)  {
     });
 })
 
+// Here we write the '.llm.restart' file to the disk.
+// The full path to the file is included in the post 
+// request 
 app.post('/api/restart', (req, res) => {
     const filepath = req.body.path;
     const path = directoryPortion(filepath, '.llm.restart')
