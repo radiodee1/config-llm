@@ -13,6 +13,10 @@ const multer = require('multer');
 const storage = multer.memoryStorage()
 const upload = multer({storage: storage}); // Specify the upload directory
 
+// This function takes the number from 
+// 'returnBackupNumber' and adds extra 
+// characters to it that form the filename
+// used to save a backup of the env file.
 function returnBackupString (num) {
     //console.log(num, "num")
     const beginning = "llm.backup.";
@@ -25,6 +29,9 @@ function returnBackupString (num) {
     return beginning + trimmed_number_part + end_part;
 }
 
+// This function returns a number 
+// formatted with zeros that is
+// at most three digits long
 function returnBackupNumber (str) {
     const beginning = "llm.backup.";
     const number_part = "000";
@@ -36,6 +43,10 @@ function returnBackupNumber (str) {
     return Number(part);
 }
 
+// This method takes raw input from the 
+// express handler and puts together a 
+// number that is part of the name for 
+// the final backup.
 function readDirForBackup(dirname) {
     //const dirname = '/home/';
     let filelist = "";
@@ -78,6 +89,10 @@ function readDirForBackup(dirname) {
 
 }
 
+// This method takes raw input from the 
+// express handler and puts together a 
+// list of backup files that are available
+// on the host.
 function readDirForList(dirname) {
     //const dirname = '/home/';
     let filelist = "";
@@ -113,6 +128,8 @@ function readDirForList(dirname) {
 }
 /////////////////////////
 
+// This method returns the directory portion of a 
+// string, given the expected file name.
 function directoryPortion(filepath, filename) {
     const x = filename.length;
     const y = filepath.slice(0, filepath.length - x);
@@ -209,10 +226,15 @@ app.post('/api/restart', (req, res) => {
    
 });
 
+// **************************
 // backup
 // restore
 // listbackup
+// **************************
 
+// Here a backup file is made from the ~/.llm.env file.
+// The express method makes a copy of the file named with 
+// a numbered filename.
 app.post('/api/backup', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
@@ -251,6 +273,8 @@ app.post('/api/backup', (req, res) => {
     });  
 });
 
+// Here a backup file is selected and 
+// copied to the ~/.llm.env file.
 app.post('/api/restore', (req, res) => {
     console.log("must provide full path to config file!!")
     const filepath = req.body.path;
@@ -285,7 +309,8 @@ app.post('/api/restore', (req, res) => {
     });  
 });
 
-
+// Here the api returns a list of backup
+// files available on a host.
 app.post('/api/listbackup', (req, res) => {
     //const dirname = req.body.path;
     const filepath = req.body.path;
@@ -322,9 +347,13 @@ app.post('/api/listbackup', (req, res) => {
     }
 })
 
+// **********************************
 // copy file 
 // copy json credential file
+// **********************************
 
+// This method copies a whole file. It is
+// meant for regular files.
 app.put('/api/file',  upload.any(), function (req, res)  {
     
     const newPath = req.body.destination;
@@ -344,6 +373,8 @@ app.put('/api/file',  upload.any(), function (req, res)  {
     });
  });
 
+// This method copies a json file to the host that
+// is used for google credentials
 app.put('/api/credential' , upload.any() , (req, res) => {
     
     const newPath = req.body.destination;
