@@ -161,7 +161,6 @@ app.post('/api/config', (req, res) => {
     //res.send('Hello World!');
 });
 
-
 // Here we read the home directory to find the 
 // current user. We use the readdir method
 app.get('/api/users', (req, res) => {
